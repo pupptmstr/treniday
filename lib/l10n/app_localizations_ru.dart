@@ -2472,6 +2472,221 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsAbout => 'О приложении';
 
   @override
+  String get settingsSectionData => 'ТВОИ ДАННЫЕ';
+
+  @override
+  String get settingsExportTitle => 'Сохранить прогресс в файл';
+
+  @override
+  String get settingsExportSubtitle =>
+      'Для нового телефона или чтобы перейти из веб-версии в приложение';
+
+  @override
+  String get settingsImportTitle => 'Добавить прогресс из файла';
+
+  @override
+  String get settingsImportSubtitle =>
+      'Он объединится с тем, что уже есть здесь, ничего не пропадёт';
+
+  @override
+  String get progressExportSubject => 'Прогресс TreniDay';
+
+  @override
+  String get progressExportFailed =>
+      'Не получилось сохранить файл. Попробуй ещё раз.';
+
+  @override
+  String get progressImportTitle => 'Добавить этот прогресс?';
+
+  @override
+  String get progressImportIntro =>
+      'Он объединится с тем, что есть здесь. Настройки останутся как есть.';
+
+  @override
+  String progressImportWorkouts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '+$count тренировки',
+      many: '+$count тренировок',
+      few: '+$count тренировки',
+      one: '+$count тренировка',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportSp(int sp) {
+    return '+$sp SP';
+  }
+
+  @override
+  String progressImportRank(String from, String to) {
+    return 'Ранг: $from → $to';
+  }
+
+  @override
+  String progressImportStreak(int from, int to) {
+    String _temp0 = intl.Intl.pluralLogic(
+      to,
+      locale: localeName,
+      other: 'Серия: $from → $to дня',
+      many: 'Серия: $from → $to дней',
+      few: 'Серия: $from → $to дня',
+      one: 'Серия: $from → $to день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportBestStreak(int from, int to) {
+    String _temp0 = intl.Intl.pluralLogic(
+      to,
+      locale: localeName,
+      other: 'Лучшая серия: $from → $to дня',
+      many: 'Лучшая серия: $from → $to дней',
+      few: 'Лучшая серия: $from → $to дня',
+      one: 'Лучшая серия: $from → $to день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportAchievements(int count, String names) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count новых достижения: $names',
+      many: '$count новых достижений: $names',
+      few: '$count новых достижения: $names',
+      one: '$count новое достижение: $names',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportStage(String branch, int stage) {
+    return '$branch: этап $stage';
+  }
+
+  @override
+  String progressImportMovedOn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ещё $count ветки продвинулись',
+      many: 'Ещё $count веток продвинулись',
+      few: 'Ещё $count ветки продвинулись',
+      one: 'Ещё $count ветка продвинулась',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportOwn(int count) {
+    return 'Свои тренировки, ветки и курсы: +$count';
+  }
+
+  @override
+  String get progressImportFirstChosen =>
+      'Первая тренировка дня выбрана заново: та, где больше SP';
+
+  @override
+  String get progressImportAdd => 'Добавить';
+
+  @override
+  String get progressImportNothing => 'Всё из этого файла здесь уже есть.';
+
+  @override
+  String get progressImportDone => 'Прогресс добавлен';
+
+  @override
+  String get progressImportNotOurs =>
+      'Это не файл прогресса TreniDay, или он повреждён.';
+
+  @override
+  String get progressImportNewer =>
+      'Этот файл из более новой версии TreniDay. Обнови приложение и добавь файл снова.';
+
+  @override
+  String get progressImportFailed =>
+      'Не получилось добавить прогресс. Ничего не изменилось.';
+
+  @override
+  String progressHealthTitle(String store) {
+    return 'Добавить в $store?';
+  }
+
+  @override
+  String progressHealthBody(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count тренировки из файла можно добавить и в $store.',
+      many: '$count тренировок из файла можно добавить и в $store.',
+      few: '$count тренировки из файла можно добавить и в $store.',
+      one: '$count тренировку из файла можно добавить и в $store.',
+    );
+    return '$_temp0 Те, на время которых в $store уже есть тренировка, пропустятся, чтобы ничего не посчиталось дважды.';
+  }
+
+  @override
+  String get progressHealthNotNow => 'Не сейчас';
+
+  @override
+  String progressHealthWorking(String store) {
+    return 'Добавляем в $store…';
+  }
+
+  @override
+  String progressHealthDone(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Добавлено в $store: $count тренировки',
+      many: 'Добавлено в $store: $count тренировок',
+      few: 'Добавлено в $store: $count тренировки',
+      one: 'Добавлено в $store: $count тренировка',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthAllThere(String store) {
+    return 'Все тренировки из файла уже есть в $store.';
+  }
+
+  @override
+  String progressHealthTooOld(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count старые тренировки не добавлены: $store не даёт приложению проверить так далеко назад.',
+      many:
+          '$count старых тренировок не добавлено: $store не даёт приложению проверить так далеко назад.',
+      few:
+          '$count старые тренировки не добавлены: $store не даёт приложению проверить так далеко назад.',
+      one:
+          '$count старая тренировка не добавлена: $store не даёт приложению проверить так далеко назад.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthFailed(String store) {
+    return 'Не получилось связаться с $store, туда ничего не добавлено.';
+  }
+
+  @override
+  String progressHealthNotWritten(String store) {
+    return 'Не получилось добавить тренировки в $store. Проверь, что TreniDay разрешено записывать туда тренировки.';
+  }
+
+  @override
+  String get commonOk => 'ОК';
+
+  @override
   String get settingsSectionHealth => 'ЗДОРОВЬЕ';
 
   @override
@@ -3505,6 +3720,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Друзей больше нет: без сервера они только обменивались QR-кодом один раз, и всё. Приложению больше не нужны камера и Bluetooth.\nТвоё имя: ведущий здоровается по имени на главном экране, а профиль и итог тренировки его показывают. Поменять — в Настройках, раздел «Профиль».\nЧетыре новые ветки вне курсов: «Сильная спина», «Ягодицы», «Руки и плечи» и «Кардио» — 22 упражнения, у каждого анимация Горо. Добавь их в свой курс: Курсы → + → Создать свой курс.';
 
   @override
+  String get releaseNotes0911 =>
+      'Прогресс можно перенести: «Настройки» → «Твои данные» → «Сохранить прогресс в файл», а на другом устройстве — «Добавить прогресс из файла». Он объединится с тем, что там уже есть: тренировки, SP, серия, этапы и достижения обоих, ничего не пропадёт. Из веб-версии в приложение или на новый телефон.\nЕсли в один день были тренировки на обоих устройствах, первой тренировкой дня остаётся та, где больше SP, а другая считается бонусной.\nПосле добавления файла прогресса его тренировки можно добавить и в Apple Health или Health Connect: те, на время которых там уже есть тренировка, пропускаются.\nНа Android тренировки теперь действительно попадают в Health Connect: до сих пор они туда не доходили.';
+
+  @override
   String get releaseNotes0910 =>
       'Хочешь TreniDay приложением для Android? В веб-версии на телефоне с Android раздел «О приложении» зовёт в тестировщики: Google Play пускает новое приложение, когда 12 человек протестируют его две недели.\nЗапросы доступа к Apple Health — на твоём языке.\nНа Android ссылка на политику конфиденциальности в Health Connect открывает политику.';
 
@@ -3562,5 +3781,5 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get releaseHistory09 =>
-      'Новые курсы: «Утренняя зарядка» с жаворонком Авророй и «Йога» с котом Мисо.\nВедущие вручают достижения своего курса; упражнения на каждую сторону стали короче.\nУ каждого упражнения есть анимация.\nСвои курсы: из готовых веток и своих, собранных из упражнений в твоём порядке.\nДрузья убраны; ведущий здоровается по имени.\nЧетыре ветки вне курсов: спина, ягодицы, руки и плечи, кардио.\nСвой звук у каждого момента тренировки, поверх твоей музыки.\nВиджеты с Горо: «Сегодня», «Горо», «Серия» и «Ранг»; на iPhone и на экране блокировки.\nНовое имя: CaliDay теперь TreniDay.';
+      'Новые курсы: «Утренняя зарядка» с жаворонком Авророй и «Йога» с котом Мисо.\nВедущие вручают достижения своего курса; упражнения на каждую сторону стали короче.\nУ каждого упражнения есть анимация.\nСвои курсы: из готовых веток и своих, собранных из упражнений в твоём порядке.\nДрузья убраны; ведущий здоровается по имени.\nЧетыре ветки вне курсов: спина, ягодицы, руки и плечи, кардио.\nСвой звук у каждого момента тренировки, поверх твоей музыки.\nВиджеты с Горо: «Сегодня», «Горо», «Серия» и «Ранг»; на iPhone и на экране блокировки.\nНовое имя: CaliDay теперь TreniDay.\nПрогресс переносится файлом: на новый телефон или из веб-версии в приложение.';
 }

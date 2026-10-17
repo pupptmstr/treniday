@@ -49,7 +49,8 @@ Apple counts data as *collected* when it is transmitted off the device. TreniDay
 | What | Where it lives | Leaves the device? |
 |---|---|---|
 | Name (optional), progress, workouts, settings, own courses | Hive boxes in the app's sandbox | No |
-| Apple Health: a workout (Traditional Strength Training, its start, end and an energy estimate) is written; the body weight is read | `core/services/health_service.dart`, called from `workout_provider.dart` after a workout, only when the user turned it on; the weight is read at that moment for the calorie estimate and not stored | No — HealthKit is on the device |
+| Apple Health: a workout (Functional Strength Training, Flexibility or Yoga by its course — 0.9.11; its start, end and an energy estimate) is written; the body weight is read; workouts are read when a progress file is added | `core/services/health_service.dart`, called from `workout_provider.dart` after a workout and from `progress_transfer.dart` after an import, only when the user turned it on; the weight is read at that moment for the calorie estimate and not stored; the workouts' times are read only to skip a file's workout where one is already there, and not stored | No — HealthKit is on the device |
+| Progress file (0.9.11) | made on the device from the Hive boxes; Settings → Your data hands it to the share sheet | Only where the user sends it (Files, a message to themselves) — the app never sends it |
 | Widgets | the App Group's `UserDefaults` (`home_widget`), read by the widget extension | No |
 | Reminders | local notifications (`flutter_local_notifications`), no push token | No |
 | Links | `about_screen.dart`: `mailto:`, the privacy policy and the terms, opened in Mail / Safari | Only what the user opens |
@@ -97,10 +98,11 @@ TreniDay contains no encryption of its own and makes no network connections; onl
 
 ### Health apps declaration and Health Connect
 
-App content → **Health apps**: health features — **Activity and fitness** (nothing else). Then a justification per Health Connect data type, exactly the three the manifest declares:
+App content → **Health apps**: health features — **Activity and fitness** (nothing else). Then a justification per Health Connect data type, exactly the four the manifest declares (`READ_EXERCISE` added in 0.9.11 — **the declaration must include it**):
 
-- **Exercise (write)** — `WRITE_EXERCISE`: "TreniDay is a home workout app. When the user finishes a workout, and only if they turned on 'Record workouts' in Settings → Health, the app writes one exercise session (strength training) with its start and end time to Health Connect, so that their bodyweight workouts appear with the rest of their activity. Nothing is read back, and nothing leaves the device."
-- **Total calories burned (write)** — `WRITE_TOTAL_CALORIES_BURNED`: "With the same exercise session the app writes an estimate of the energy it burned (MET 5.5 × body weight × duration), so the workout counts toward the user's daily energy in Health Connect. Written only when 'Record workouts' is on."
+- **Exercise (write)** — `WRITE_EXERCISE`: "TreniDay is a home workout app. When the user finishes a workout, and only if they turned on 'Record workouts' in Settings → Health, the app writes one exercise session (calisthenics, or yoga for the Yoga course) with its start and end time to Health Connect, so that their bodyweight workouts appear with the rest of their activity. Nothing leaves the device."
+- **Exercise (read)** — `READ_EXERCISE`: "Only when the user adds a progress file from another device (Settings → Your data) and agrees to put its workouts into Health Connect, the app reads the start and end times of the exercise sessions in that period, so that it skips every workout of the file at a time when Health Connect already has one and nothing is counted twice. The times are compared on the device and not stored or sent anywhere."
+- **Total calories burned (write)** — `WRITE_TOTAL_CALORIES_BURNED`: "With the same exercise session the app writes an estimate of the energy it burned (MET × body weight × duration; MET 5.5 for strength, 2.5 for yoga, 2.3 for stretching), so the workout counts toward the user's daily energy in Health Connect. Written only when 'Record workouts' is on."
 - **Weight (read)** — `READ_WEIGHT`: "Only if the user also turns on 'Read body weight', the app reads the most recent weight of the last 90 days at the end of a workout to make that calorie estimate more accurate (70 kg is used otherwise). The value is used for that one calculation and is not stored or sent anywhere."
 
 Requirements to keep: request no other data types; the privacy policy in the Play listing is the one Health Connect shows; when the user opens TreniDay's privacy policy from Health Connect the app must show it (§ Before the first upload — today the permission-usage intent only opens Home). Re-submit the declaration whenever a data type is added or dropped.

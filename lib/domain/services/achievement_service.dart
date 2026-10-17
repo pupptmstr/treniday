@@ -141,16 +141,44 @@ class AchievementService {
         check('cardio_complete', newStage >= BranchId.cardio.stageCount);
     }
 
-    // all_complete: every branch of the built-in courses at max stage (the
-    // branches outside the courses are optional, owner 2026-10-11)
-    final allDone = CourseCatalog.courseBranches.every((b) {
-      final p = allProgress[b];
-      return p != null && p.currentStage >= b.stageCount;
-    });
-    check('all_complete', allDone);
+    check('all_complete', _allCourseBranchesDone(allProgress));
 
     return earned;
   }
+
+  /// Returns IDs of achievements newly earned by progress added from a file
+  /// (`ProgressMerge`): what only the combined totals reach. Each side's own
+  /// achievements come with it; here the merged workout count, the longest
+  /// streak (it was the current one on the day it was reached), the rank, and
+  /// every course branch done.
+  List<String> checkAfterMerge({
+    required UserProfile profile,
+    required int totalWorkouts,
+    required Map<BranchId, SkillProgress> allProgress,
+    required Set<String> alreadyEarned,
+  }) {
+    final earned = checkAfterWorkout(
+      profile: UserProfile(
+        rank: profile.rank,
+        currentStreak: profile.longestStreak,
+      ),
+      totalWorkouts: totalWorkouts,
+      alreadyEarned: alreadyEarned,
+    );
+    if (_allCourseBranchesDone(allProgress) &&
+        alreadyEarned.add('all_complete')) {
+      earned.add('all_complete');
+    }
+    return earned;
+  }
+
+  /// all_complete: every branch of the built-in courses at max stage (the
+  /// branches outside the courses are optional, owner 2026-10-11).
+  static bool _allCourseBranchesDone(Map<BranchId, SkillProgress> allProgress) =>
+      CourseCatalog.courseBranches.every((b) {
+        final p = allProgress[b];
+        return p != null && p.currentStage >= b.stageCount;
+      });
 }
 
 final achievementServiceProvider =

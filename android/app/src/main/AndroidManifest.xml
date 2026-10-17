@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <!-- Health Connect permissions (Android 14+ built-in; older = separate app) -->
     <uses-permission android:name="android.permission.health.READ_WEIGHT"/>
+    <!-- Workouts of every app, read when a progress file is added, so its workouts go to
+         Health Connect only where none is there at that time (0.9.11). -->
+    <uses-permission android:name="android.permission.health.READ_EXERCISE"/>
     <uses-permission android:name="android.permission.health.WRITE_EXERCISE"/>
     <uses-permission android:name="android.permission.health.WRITE_TOTAL_CALORIES_BURNED"/>
     <application

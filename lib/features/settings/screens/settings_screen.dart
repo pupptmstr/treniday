@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/extensions/build_context_l10n.dart';
 import '../../../core/l10n/app_languages.dart';
 import '../../../data/models/enums.dart';
+import '../progress_transfer.dart';
 import '../providers/settings_provider.dart' show settingsProvider;
 
 class SettingsScreen extends ConsumerWidget {
@@ -317,6 +318,46 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               ),
             ],
+
+            // ── Your data: the progress to a file and back ──────────────
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              child: Text(
+                l10n.settingsSectionData,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.2,
+                  color: scheme.primary,
+                ),
+              ),
+            ),
+
+            Builder(
+              // Its own context: the share sheet's popover on iPad points
+              // at this tile.
+              builder: (tileContext) => _SettingsTile(
+                title: l10n.settingsExportTitle,
+                subtitle: l10n.settingsExportSubtitle,
+                trailing: const Icon(Icons.ios_share_rounded),
+                onTap: () {
+                  final box = tileContext.findRenderObject() as RenderBox?;
+                  exportProgress(context, ref,
+                      origin: box == null
+                          ? null
+                          : box.localToGlobal(Offset.zero) & box.size);
+                },
+              ),
+            ),
+
+            const Divider(indent: 20, endIndent: 20, height: 1),
+
+            _SettingsTile(
+              title: l10n.settingsImportTitle,
+              subtitle: l10n.settingsImportSubtitle,
+              trailing: const Icon(Icons.file_open_outlined),
+              onTap: () => importProgress(context, ref),
+            ),
 
             // ── About section ─────────────────────────────────────────────
             const Divider(indent: 20, endIndent: 20, height: 1),

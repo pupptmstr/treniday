@@ -117,11 +117,13 @@ final streakServiceProvider = Provider<StreakService>((_) => const StreakService
 /// - days == 2 and a freeze is available      → stored streak (freeze will
 ///                                              save it on the next workout)
 /// - otherwise                                → 0 (streak is already lost)
-final displayStreakProvider = Provider.autoDispose<int>((ref) {
-  final profile = ref.read(userRepositoryProvider).getProfile();
-  final service = ref.read(streakServiceProvider);
-  final days = service.daysSinceLastWorkout(profile);
+final displayStreakProvider = Provider.autoDispose<int>((ref) =>
+    displayStreakOf(ref.read(userRepositoryProvider).getProfile(), DateTime.now()));
+
+/// The streak [displayStreakProvider] shows for [profile] on the day of [now].
+int displayStreakOf(UserProfile profile, DateTime now) {
+  final days = const StreakService().daysSinceLastWorkout(profile, now: now);
   if (days <= 1) return profile.currentStreak;
   if (days == 2 && profile.streakFreezeCount > 0) return profile.currentStreak;
   return 0;
-});
+}

@@ -930,6 +930,184 @@
   "releaseNotes0811": "Der Trainingsumfang ersetzt „5, 10 oder 15 Minuten“: Kurz, Standard oder Voll. Er legt fest, wie viele Skills ein Training umfasst, nicht wie lange es dauert.",
   "releaseNotes0810": "Übungen auf Zeit starten jetzt von selbst nach einem kurzen Countdown zum Bereitmachen. Tippe auf Pause, wenn du mehr Zeit zum Lesen oder für die Position brauchst.\nDie Suche in der Übungsbibliothek funktioniert auf Russisch und Englisch.\nEinige Texte, die nur in einer Sprache waren, sind übersetzt.",
   "settingsAbout": "Über die App",
+  "settingsSectionData": "DEINE DATEN",
+  "settingsExportTitle": "Fortschritt in eine Datei speichern",
+  "settingsExportSubtitle": "Für ein neues Handy oder um von der Web-Version in die App zu wechseln",
+  "settingsImportTitle": "Fortschritt aus einer Datei hinzufügen",
+  "settingsImportSubtitle": "Er wird mit dem zusammengeführt, was schon hier ist – nichts geht verloren",
+  "progressExportSubject": "TreniDay-Fortschritt",
+  "progressExportFailed": "Die Datei konnte nicht gespeichert werden. Versuch es noch einmal.",
+  "progressImportTitle": "Diesen Fortschritt hinzufügen?",
+  "progressImportIntro": "Er wird mit dem zusammengeführt, was hier ist. Deine Einstellungen bleiben, wie sie sind.",
+  "progressImportWorkouts": "{count, plural, one{+{count} Training} other{+{count} Trainings}}",
+  "@progressImportWorkouts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportSp": "+{sp} SP",
+  "@progressImportSp": {
+    "placeholders": {
+      "sp": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportRank": "Rang: {from} → {to}",
+  "@progressImportRank": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "progressImportStreak": "{to, plural, one{Serie: {from} → {to} Tag} other{Serie: {from} → {to} Tage}}",
+  "@progressImportStreak": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportBestStreak": "{to, plural, one{Längste Serie: {from} → {to} Tag} other{Längste Serie: {from} → {to} Tage}}",
+  "@progressImportBestStreak": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportAchievements": "{count, plural, one{{count} neuer Erfolg: {names}} other{{count} neue Erfolge: {names}}}",
+  "@progressImportAchievements": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "progressImportStage": "{branch}: Stufe {stage}",
+  "@progressImportStage": {
+    "placeholders": {
+      "branch": {
+        "type": "String"
+      },
+      "stage": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportMovedOn": "{count, plural, one{{count} weiterer Zweig ist vorangekommen} other{{count} weitere Zweige sind vorangekommen}}",
+  "@progressImportMovedOn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportOwn": "Eigene Routinen, Zweige und Kurse: +{count}",
+  "@progressImportOwn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportFirstChosen": "Das erste Training eines Tages wird neu gewählt: das mit mehr SP",
+  "progressImportAdd": "Hinzufügen",
+  "progressImportNothing": "Alles aus dieser Datei ist schon hier.",
+  "progressImportDone": "Fortschritt hinzugefügt",
+  "progressImportNotOurs": "Das ist keine TreniDay-Fortschrittsdatei, oder sie ist beschädigt.",
+  "progressImportNewer": "Diese Datei stammt aus einer neueren Version von TreniDay. Aktualisiere die App und füge die Datei noch einmal hinzu.",
+  "progressImportFailed": "Der Fortschritt konnte nicht hinzugefügt werden. Es hat sich nichts geändert.",
+  "progressHealthTitle": "Zu {store} hinzufügen?",
+  "@progressHealthTitle": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthBody": "{count, plural, one{{count} Training aus der Datei kann auch zu {store}.} other{{count} Trainings aus der Datei können auch zu {store}.}} Trainings zu einer Zeit, für die {store} schon ein Training hat, werden übersprungen, damit nichts doppelt zählt.",
+  "@progressHealthBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthNotNow": "Nicht jetzt",
+  "progressHealthWorking": "Wird zu {store} hinzugefügt …",
+  "@progressHealthWorking": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthDone": "{count, plural, one{Zu {store} hinzugefügt: {count} Training} other{Zu {store} hinzugefügt: {count} Trainings}}",
+  "@progressHealthDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthAllThere": "Alle Trainings aus der Datei sind schon in {store}.",
+  "@progressHealthAllThere": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthTooOld": "{count, plural, one{{count} älteres Training wurde ausgelassen: {store} lässt die App nicht so weit zurück prüfen.} other{{count} ältere Trainings wurden ausgelassen: {store} lässt die App nicht so weit zurück prüfen.}}",
+  "@progressHealthTooOld": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthFailed": "{store} war nicht erreichbar, dort wurde nichts hinzugefügt.",
+  "@progressHealthFailed": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthNotWritten": "Die Trainings konnten nicht zu {store} hinzugefügt werden. Prüfe, ob TreniDay dort Trainings speichern darf.",
+  "@progressHealthNotWritten": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "commonOk": "OK",
   "settingsSectionHealth": "GESUNDHEIT",
   "settingsHealthWorkoutsTitle": "Trainings speichern",
   "settingsHealthWorkoutsSubtitle": "In Apple Health / Health Connect speichern",
@@ -1470,6 +1648,7 @@
   "whatsNewHistory": "Versionsverlauf",
   "releaseNotes094": "Deine eigenen Kurse stehen jetzt in der Kursliste unter +: Entferne den Haken, um einen Kurs oben auszublenden (er bleibt erhalten), der Stift öffnet ihn zum Bearbeiten.\nEin eigener Kurs trägt oben ein Werkzeug-Zeichen statt des Gesichts seines Hosts.\nEin Erfolg, der noch vor dir liegt: Sein Host hält ihn jetzt in den Händen, eine graue Medaille mit Schloss.\n„Über die App“: Tippe auf Goro, er hat ein paar neue Posen.\nStartbildschirm: Vor dem ersten Training des Tages sagt dein Host ein paar Worte (jeder seine eigenen, neue bei jedem Öffnen und auf Tippen), darunter stehen deine nächsten Ziele (der nächste Rang, der nächste Erfolg, eine freie Challenge, die du direkt hier startest) und die Zweige des Kurses.\nDanach zeigt der Startbildschirm deine letzten Trainings und was heute gewachsen ist: mehr Wiederholungen, ein Satz, weniger Pause, eine neue Stufe.\nDer Pfeil am Trainingsknopf klappt den Plan des Tages auf, Goro zeigt jede Übung.\nGoros Animationen überall, wo eine Übung genannt wird: der Weg eines Zweigs, der Tab „Kurse“, die Baukästen, gespeicherte Trainings, der Verlauf, die Pause vor der nächsten Übung.",
   "releaseNotes095": "Freunde gibt es nicht mehr: Ohne Server konnten sie nur einmal einen QR-Code tauschen, mehr nicht. Die App braucht keine Kamera und kein Bluetooth mehr.\nDein Name: Dein Host begrüßt dich damit auf dem Startbildschirm, Profil und Trainingsabschluss zeigen ihn. Ändern unter Einstellungen → Profil.\nVier neue Zweige außerhalb der Kurse: Starker Rücken, Gesäß, Arme & Schultern und Cardio — 22 Übungen, jede mit Goros Animation. Nimm sie in deinen eigenen Kurs auf: Kurse → + → Eigenen Kurs erstellen.",
+  "releaseNotes0911": "Nimm deinen Fortschritt mit: Einstellungen → Deine Daten → „Fortschritt in eine Datei speichern“, dann auf dem anderen Gerät „Fortschritt aus einer Datei hinzufügen“. Er wird mit dem zusammengeführt, was dort schon ist: Trainings, SP, Serie, Stufen und Erfolge von beiden, nichts geht verloren. Von der Web-Version in die App oder auf ein neues Handy.\nGab es an einem Tag auf beiden Geräten ein Training, bleibt das mit mehr SP das erste des Tages, das andere zählt als Bonustraining.\nNach dem Hinzufügen einer Fortschrittsdatei können ihre Trainings auch zu Apple Health oder Health Connect: Trainings zu einer Zeit, zu der dort schon eines ist, werden übersprungen.\nAuf Android kommen Trainings jetzt wirklich in Health Connect an: bisher kamen sie dort nicht an.",
   "releaseNotes0910": "Du willst TreniDay als Android-App? In der Web-Version auf einem Android-Handy lädt dich „Über die App“ ein, Tester zu werden: Google Play lässt eine neue App zu, wenn 12 Leute sie zwei Wochen lang getestet haben.\nDie Anfragen für Apple Health sind in deiner Sprache.\nAuf Android öffnet der Link zur Datenschutzerklärung in Health Connect die Erklärung.",
   "releaseNotes099": "CaliDay heißt jetzt TreniDay: ein neuer Name, derselbe Goro und dein ganzer Fortschritt.\nDie Web-Version ist umgezogen: pupptmstr.github.io/treniday/app — öffne sie im selben Browser, und dein Fortschritt ist da.",
   "releaseNotes098": "Die Web-Version spielt auf dem iPhone jetzt alle Töne des Trainings — die Ticks, den Start einer Halteübung, Seite wechseln, das Ende der Pause —, nicht nur die nach einem Tippen.\nTreniDay hat eine Website: pupptmstr.github.io/treniday — alles über die App in vier Sprachen.",
@@ -1484,5 +1663,5 @@
   "releaseHistory06": "Die Übungsbibliothek: alle Übungen, mit Suche und Filtern.\nTippe im Profil auf Serie, Rang oder Serienschutz, um zu sehen, was sie bedeuten.",
   "releaseHistory07": "Eigene Trainings: Wähle Übungen und speichere sie als Routine oder starte eine schnelle nach Schwerpunkt.\nAnimationen für die Balance-Stufen.\nDie Datenschutzerklärung und die Nutzungsbedingungen.",
   "releaseHistory08": "Die Werte auf dem Startbildschirm öffnen Kalender, Verlauf und Ränge; ein Trainingskalender.\nEin Rang sinkt nach langen Pausen und kommt mit dem Training zurück.\nTreniDay im Browser: die Web-Version.\nAnimationen für jede Übung der ersten Kurse.\nÜbungen auf Zeit starten nach einem kurzen Countdown von selbst; Übungen für eine Seite laufen auf beiden.\nTrainings sind Kurz, Standard oder Voll, mit einer Zeitschätzung, die dein Tempo lernt.\n„Was ist neu“ unter der Glocke im Profil; Deutsch und Spanisch.\nJeder Skill wächst einmal am Tag, in jedem Training.\nEin neuer Kurs, „Dehnen am Abend“, und ein Host für jeden Kurs.",
-  "releaseHistory09": "Neue Kurse: „Morgenroutine“ mit Lerche Aurora und „Yoga“ mit Kater Miso.\nDie Hosts überreichen die Erfolge ihres Kurses; kürzere Übungen pro Seite.\nJede Übung hat eine Animation.\nEigene Kurse: aus fertigen Zweigen und eigenen, gebaut aus Übungen in deiner Reihenfolge.\nFreunde entfernt; dein Host begrüßt dich mit deinem Namen.\nVier Zweige außerhalb der Kurse: Rücken, Gesäß, Arme und Schultern, Cardio.\nEin eigener Ton für jeden Moment des Trainings, über deiner Musik.\nWidgets mit Goro: Heute, Goro, Serie und Rang; auf dem iPhone auch auf dem Sperrbildschirm.\nEin neuer Name: CaliDay heißt jetzt TreniDay."
+  "releaseHistory09": "Neue Kurse: „Morgenroutine“ mit Lerche Aurora und „Yoga“ mit Kater Miso.\nDie Hosts überreichen die Erfolge ihres Kurses; kürzere Übungen pro Seite.\nJede Übung hat eine Animation.\nEigene Kurse: aus fertigen Zweigen und eigenen, gebaut aus Übungen in deiner Reihenfolge.\nFreunde entfernt; dein Host begrüßt dich mit deinem Namen.\nVier Zweige außerhalb der Kurse: Rücken, Gesäß, Arme und Schultern, Cardio.\nEin eigener Ton für jeden Moment des Trainings, über deiner Musik.\nWidgets mit Goro: Heute, Goro, Serie und Rang; auf dem iPhone auch auf dem Sperrbildschirm.\nEin neuer Name: CaliDay heißt jetzt TreniDay.\nDein Fortschritt zieht mit einer Datei um: auf ein neues Handy oder von der Web-Version in die App."
 }
