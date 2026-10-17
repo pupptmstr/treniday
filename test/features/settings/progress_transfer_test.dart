@@ -40,6 +40,7 @@ const _summary = ProgressMergeSummary(
   stageUps: [StageUp('push', 5), StageUp('custom_b1', 2)],
   branchesMovedOn: 3,
   addedOwn: 2,
+  firstsChosenAgain: true,
 );
 
 void main() {
@@ -59,6 +60,7 @@ void main() {
         l10n.progressImportAchievements(2,
             '${AchievementL10n.name(l10n, 'workouts_10')}, ${AchievementL10n.name(l10n, 'push_s3')}'),
         l10n.progressImportOwn(2),
+        l10n.progressImportFirstChosen,
       ], reason: l10n.localeName);
       for (final line in lines.take(2)) {
         expect(line, matches(RegExp(r'\d')), reason: l10n.localeName);
@@ -107,9 +109,9 @@ void main() {
           [l10n.progressHealthAllThere('Health Connect')]);
     });
 
-    test('nothing could be written', () {
+    test('nothing could be written: writing not allowed', () {
       expect(lines([log], 0, 0),
-          [l10n.progressHealthFailed('Health Connect')]);
+          [l10n.progressHealthNotWritten('Health Connect')]);
     });
 
     test('older workouts could not be checked', () {

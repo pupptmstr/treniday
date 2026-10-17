@@ -35,11 +35,28 @@ void main() {
       expect(HealthImport.spanOf(ended(5, 9, minutes: 0)), isNull);
     });
 
-    test('the range to read covers every workout', () {
+    test('the range to read covers every workout, and starts earlier', () {
+      // A store returns the workouts that start in the range: one already
+      // going on when the file's first workout began must be read too.
       final r = HealthImport.rangeOf([ended(7, 9), ended(3, 20), ended(5, 9)])!;
-      expect(r.start, DateTime(2026, 10, 3, 19, 40));
+      expect(r.start, DateTime(2026, 10, 3, 19, 40).subtract(HealthImport.lookBack));
       expect(r.end, DateTime(2026, 10, 7, 9));
       expect(HealthImport.rangeOf([ended(1, 9, minutes: 0)]), isNull);
+    });
+
+    test('a workout already going on when the read range begins is found', () {
+      // Seen on the iOS simulator: 11:20–11:24 from the file, 11:18–11:21
+      // in Apple Health.
+      final fromFile = ended(17, 11, minute: 24, minutes: 4);
+      final range = HealthImport.rangeOf([fromFile])!;
+      final inHealth = span(17, 11, 18, 11, 21);
+      expect(inHealth.start.isBefore(HealthImport.spanOf(fromFile)!.start),
+          isTrue);
+      expect(range.start.isAfter(inHealth.start), isFalse);
+      final plan = HealthImport.plan([fromFile], [inHealth],
+          checkedFrom: range.start.add(HealthImport.lookBack));
+      expect(plan.toWrite, isEmpty);
+      expect(plan.unchecked, 0);
     });
 
     test('a workout at a time when Health has one is left out, of any app', () {

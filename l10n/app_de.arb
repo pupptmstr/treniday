@@ -1026,6 +1026,7 @@
       }
     }
   },
+  "progressImportFirstChosen": "Das erste Training eines Tages wird neu gewählt: das mit mehr SP",
   "progressImportAdd": "Hinzufügen",
   "progressImportNothing": "Alles aus dieser Datei ist schon hier.",
   "progressImportDone": "Fortschritt hinzugefügt",
@@ -1092,6 +1093,14 @@
   },
   "progressHealthFailed": "{store} war nicht erreichbar, dort wurde nichts hinzugefügt.",
   "@progressHealthFailed": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthNotWritten": "Die Trainings konnten nicht zu {store} hinzugefügt werden. Prüfe, ob TreniDay dort Trainings speichern darf.",
+  "@progressHealthNotWritten": {
     "placeholders": {
       "store": {
         "type": "String"

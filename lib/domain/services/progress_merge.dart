@@ -41,6 +41,7 @@ class ProgressMergeSummary {
     required this.stageUps,
     required this.branchesMovedOn,
     required this.addedOwn,
+    this.firstsChosenAgain = false,
   });
 
   final int addedWorkouts;
@@ -65,6 +66,10 @@ class ProgressMergeSummary {
 
   /// Own routines, branches and courses that are new here.
   final int addedOwn;
+
+  /// A workout already here became the first one of its day, or stopped
+  /// being it (the two devices had chosen differently).
+  final bool firstsChosenAgain;
 }
 
 class ProgressMergeResult {
@@ -96,7 +101,9 @@ class ProgressMergeResult {
 /// - One first workout a day (owner, 2026-10-17): when both devices had one
 ///   on the same day, the one with more SP keeps them; the other becomes a
 ///   repeat workout and earns what a repeat one would ([bonusSpOf]). On a tie
-///   this device's stays first.
+///   the earlier one stays first, so every device decides the same. A
+///   workout that is the first one on either side takes part, so two devices
+///   that once chose differently agree after the next exchange of files.
 /// - SP: this device's plus what the merge adds to the log; the rank follows.
 /// - Streak and freezes: the merged training days replayed through
 ///   [StreakService], never below what a device knew about its last day.
@@ -125,14 +132,23 @@ abstract final class ProgressMerge {
         if (known.add(logKey(l))) l,
     ];
     logs.addAll(added);
-    _keepOneFirstWorkoutADay(logs, {
+    // The first workouts of the file, by key: a workout this device keeps as
+    // a repeat one may be the first one there (each device chose before it
+    // knew the other's).
+    final theirFirsts = {
+      for (final l in theirs.logs)
+        if (l.isPrimary) logKey(l): l,
+    };
+    final firstsChanged = _keepOneFirstWorkoutADay(logs, {
       for (final l in added)
         if (l.isPrimary) _day(l.date),
-    });
+      for (final l in mine.logs)
+        if (!l.isPrimary && theirFirsts.containsKey(logKey(l))) _day(l.date),
+    }, theirFirsts);
 
     // ── Streak ────────────────────────────────────────────────────────────
     final p = mine.profile;
-    if (added.isNotEmpty) {
+    if (added.isNotEmpty || firstsChanged) {
       _replayStreak(logs, p, local.profile, imported.profile);
     }
     p.longestStreak = [
@@ -265,6 +281,9 @@ abstract final class ProgressMerge {
         stageUps: stageUps,
         branchesMovedOn: movedOn,
         addedOwn: addedOwn,
+        // This device's workouts come first in [logs], in the same order.
+        firstsChosenAgain: Iterable.generate(local.logs.length)
+            .any((i) => logs[i].isPrimary != local.logs[i].isPrimary),
       ),
     );
   }
@@ -315,30 +334,53 @@ abstract final class ProgressMerge {
         .round();
   }
 
-  /// On each of [days] keeps one first workout: the one with the most SP
-  /// (the earlier in [logs] on a tie — this device's come first); the others
-  /// become repeat workouts.
-  static void _keepOneFirstWorkoutADay(
-      List<WorkoutLog> logs, Set<DateTime> days) {
+  /// On each of [days] keeps one first workout and makes the others repeat
+  /// ones; returns whether any workout changed between the two.
+  ///
+  /// The candidates are the first workouts of the day here and those that are
+  /// the first ones in the file ([theirFirsts], by [logKey]; a workout kept
+  /// here as a repeat one comes back with its full SP). The winner: the most
+  /// SP, on a tie the earlier one, then the smaller [logKey] — never "this
+  /// device's", or two devices merging each other's files would keep
+  /// different ones.
+  static bool _keepOneFirstWorkoutADay(List<WorkoutLog> logs,
+      Set<DateTime> days, Map<String, WorkoutLog> theirFirsts) {
+    bool before(WorkoutLog a, WorkoutLog b) {
+      if (a.spEarned != b.spEarned) return a.spEarned > b.spEarned;
+      final byTime = a.date.compareTo(b.date);
+      if (byTime != 0) return byTime < 0;
+      return logKey(a).compareTo(logKey(b)) < 0;
+    }
+
+    var changed = false;
     for (final day in days) {
-      final firsts = [
+      // Index → the workout as a first one.
+      final firsts = <int, WorkoutLog>{
         for (var i = 0; i < logs.length; i++)
-          if (logs[i].isPrimary && _day(logs[i].date) == day) i,
-      ];
-      if (firsts.length < 2) continue;
-      var keep = firsts.first;
-      for (final i in firsts) {
-        if (logs[i].spEarned > logs[keep].spEarned) keep = i;
+          if (_day(logs[i].date) == day)
+            i: ?(logs[i].isPrimary ? logs[i] : theirFirsts[logKey(logs[i])]),
+      };
+      if (firsts.isEmpty) continue;
+      var keep = firsts.keys.first;
+      for (final i in firsts.keys) {
+        if (before(firsts[i]!, firsts[keep]!)) keep = i;
       }
-      for (final i in firsts) {
-        if (i == keep) continue;
-        logs[i] = _copyLog(logs[i],
-            isPrimary: false,
-            spEarned: bonusSpOf(logs[i]),
-            freezeUsed: false,
-            freezeEarned: false);
+      for (final MapEntry(key: i, value: first) in firsts.entries) {
+        final next = i == keep
+            ? first
+            : _copyLog(first,
+                isPrimary: false,
+                spEarned: bonusSpOf(first),
+                freezeUsed: false,
+                freezeEarned: false);
+        if (next.isPrimary != logs[i].isPrimary ||
+            next.spEarned != logs[i].spEarned) {
+          changed = true;
+        }
+        logs[i] = next;
       }
     }
+    return changed;
   }
 
   /// Replays the training days of [logs] into [p] (streak, freezes, the last

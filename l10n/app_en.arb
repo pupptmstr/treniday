@@ -1026,6 +1026,7 @@
       }
     }
   },
+  "progressImportFirstChosen": "The first workout of a day is chosen again: the one with more SP",
   "progressImportAdd": "Add",
   "progressImportNothing": "Everything in this file is already here.",
   "progressImportDone": "Progress added",
@@ -1092,6 +1093,14 @@
   },
   "progressHealthFailed": "Couldn't reach {store}, nothing was added there.",
   "@progressHealthFailed": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthNotWritten": "Couldn't add the workouts to {store}. Check that TreniDay may write workouts there.",
+  "@progressHealthNotWritten": {
     "placeholders": {
       "store": {
         "type": "String"

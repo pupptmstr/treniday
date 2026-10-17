@@ -4350,6 +4350,12 @@ abstract class AppLocalizations {
   /// **'Your routines, branches and courses: +{count}'**
   String progressImportOwn(int count);
 
+  /// No description provided for @progressImportFirstChosen.
+  ///
+  /// In en, this message translates to:
+  /// **'The first workout of a day is chosen again: the one with more SP'**
+  String get progressImportFirstChosen;
+
   /// No description provided for @progressImportAdd.
   ///
   /// In en, this message translates to:
@@ -4433,6 +4439,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t reach {store}, nothing was added there.'**
   String progressHealthFailed(String store);
+
+  /// No description provided for @progressHealthNotWritten.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t add the workouts to {store}. Check that TreniDay may write workouts there.'**
+  String progressHealthNotWritten(String store);
 
   /// No description provided for @commonOk.
   ///

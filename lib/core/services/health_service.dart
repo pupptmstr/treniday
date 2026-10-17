@@ -31,36 +31,42 @@ class HealthService {
     }
   }
 
-  /// Requests write access to WORKOUT + TOTAL_CALORIES_BURNED, and optionally
-  /// read access to WEIGHT. Returns true if all permissions were granted.
-  Future<bool> requestPermissions({bool readWeight = false}) async {
-    final types = [
-      HealthDataType.WORKOUT,
-      HealthDataType.TOTAL_CALORIES_BURNED,
-      if (readWeight) HealthDataType.WEIGHT,
-    ];
-    final perms = [
-      HealthDataAccess.WRITE,
-      HealthDataAccess.WRITE,
-      if (readWeight) HealthDataAccess.READ,
-    ];
-    try {
-      return await _health.requestAuthorization(types, permissions: perms);
-    } catch (_) {
-      return false;
-    }
-  }
+  /// What TreniDay asks of Apple Health / Health Connect: writing workouts
+  /// and their energy always, reading the body weight when [readWeight],
+  /// reading workouts when [readWorkouts] (a progress file is checked against
+  /// them).
+  ///
+  /// Every request asks for all of it: HealthKit keeps for a type only what
+  /// the latest request asked for. A request to read workouts alone took their
+  /// write permission away (0.9.11, found on the iOS simulator: "not write
+  /// authorized" right after it), so the file's workouts could not be saved.
+  @visibleForTesting
+  static ({List<HealthDataType> types, List<HealthDataAccess> access})
+      permissionsFor({required bool readWeight, required bool readWorkouts}) =>
+          (
+            types: [
+              HealthDataType.WORKOUT,
+              HealthDataType.TOTAL_CALORIES_BURNED,
+              if (readWeight) HealthDataType.WEIGHT,
+            ],
+            access: [
+              readWorkouts
+                  ? HealthDataAccess.READ_WRITE
+                  : HealthDataAccess.WRITE,
+              HealthDataAccess.WRITE,
+              if (readWeight) HealthDataAccess.READ,
+            ],
+          );
 
-  /// Asks to read workouts (a progress file's workouts are checked against
-  /// them before they are added). On iOS the answer is never known: a denied
-  /// read just reads nothing. On Android, without it, the app still reads the
-  /// sessions it wrote itself.
-  Future<bool> requestWorkoutRead() async {
+  /// Requests [permissionsFor]. Returns true if all were granted (on iOS:
+  /// the sheet was answered; HealthKit never tells whether reading was).
+  Future<bool> requestPermissions({
+    bool readWeight = false,
+    bool readWorkouts = false,
+  }) async {
+    final p = permissionsFor(readWeight: readWeight, readWorkouts: readWorkouts);
     try {
-      return await _health.requestAuthorization(
-        [HealthDataType.WORKOUT],
-        permissions: [HealthDataAccess.READ],
-      );
+      return await _health.requestAuthorization(p.types, permissions: p.access);
     } catch (_) {
       return false;
     }

@@ -219,7 +219,8 @@ Future<List<String>> _addToHealth(
   required String store,
 }) async {
   final health = HealthService.instance;
-  await health.requestWorkoutRead();
+  // The whole set, not the read alone: HealthKit would drop the write.
+  await health.requestPermissions(readWeight: readWeight, readWorkouts: true);
   var from = range.start;
   var inHealth = await health.workoutSpans(from, range.end);
   if (inHealth == null && defaultTargetPlatform == TargetPlatform.android) {
@@ -233,7 +234,8 @@ Future<List<String>> _addToHealth(
   }
   if (inHealth == null) return [l10n.progressHealthFailed(store)];
 
-  final plan = HealthImport.plan(added, inHealth, checkedFrom: from);
+  final plan = HealthImport.plan(added, inHealth,
+      checkedFrom: from.add(HealthImport.lookBack));
   final weightKg = WorkoutEnergy.resolveWeightKg(
       readWeight ? await health.readBodyWeight() : null);
   var written = 0;
@@ -264,8 +266,11 @@ List<String> healthResultLines(
   required String store,
 }) =>
     [
+      // Nothing written although there was something to write: the user did
+      // not allow writing in the system sheet (it lists writing switched off
+      // again when the read is asked for).
       if (plan.toWrite.isNotEmpty && written == 0)
-        l10n.progressHealthFailed(store)
+        l10n.progressHealthNotWritten(store)
       else if (written > 0)
         l10n.progressHealthDone(written, store)
       else if (plan.unchecked == 0)
@@ -305,6 +310,7 @@ List<String> importSummaryLines(
         s.newAchievementIds.map((id) => AchievementL10n.name(l10n, id)).join(', '),
       ),
     if (s.addedOwn > 0) l10n.progressImportOwn(s.addedOwn),
+    if (s.firstsChosenAgain) l10n.progressImportFirstChosen,
   ];
 }
 

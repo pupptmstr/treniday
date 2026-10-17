@@ -211,12 +211,58 @@ void main() {
       expect(r.summary.addedSp, 110);
     });
 
-    test("on a tie this device's stays the first", () {
+    test('on a tie the earlier one stays the first, on either device', () {
       final phone = device([workout(day(5, hour: 21), sp: 90)]);
       final web = device([workout(day(5, hour: 7), sp: 90)]);
-      final m = merge(phone, web).merged;
-      expect(logAt(m, day(5, hour: 21)).isPrimary, isTrue);
-      expect(logAt(m, day(5, hour: 7)).isPrimary, isFalse);
+      for (final m in [merge(phone, web).merged, merge(web, phone).merged]) {
+        expect(logAt(m, day(5, hour: 7)).isPrimary, isTrue);
+        expect(logAt(m, day(5, hour: 21)).isPrimary, isFalse);
+        expect(logAt(m, day(5, hour: 21)).spEarned, 30);
+      }
+    });
+
+    test('two devices that once chose differently agree after an exchange',
+        () {
+      // Found on the devices (the rule kept "this device's" on a tie then):
+      // Android kept its 11:24 first and made the web's 11:16 a repeat one,
+      // the iPhone the other way round, and the files said "already here".
+      WorkoutLog repeatOf(DateTime d) =>
+          workout(d, sp: 10, primary: false, duration: 300);
+      final android = device([
+        workout(day(5, hour: 11, minute: 24), sp: 30, duration: 300),
+        repeatOf(day(5, hour: 11, minute: 16)),
+      ]);
+      final iphone = device([
+        workout(day(5, hour: 11, minute: 16), sp: 30, duration: 300),
+        repeatOf(day(5, hour: 11, minute: 24)),
+      ]);
+      final a = merge(android, iphone);
+      final i = merge(iphone, android);
+      expect(a.changesAnything, isTrue);
+      expect(essence(a.merged), essence(i.merged));
+      final first = a.merged.logs.singleWhere((l) => l.isPrimary);
+      expect(first.date, day(5, hour: 11, minute: 16));
+      expect(first.spEarned, 30);
+      expect(a.merged.profile.totalSP, 40);
+      expect(a.summary.addedSp, 0);
+      expect(a.summary.firstsChosenAgain, isTrue);
+      expect(i.summary.firstsChosenAgain, isFalse);
+      // And then nothing more to do on either side.
+      expect(merge(a.merged, i.merged).changesAnything, isFalse);
+      expect(merge(i.merged, a.merged).changesAnything, isFalse);
+    });
+
+    test('three devices with the same SP end up the same', () {
+      // The case found on the devices: web and Android at 30 SP each; the
+      // Android file, merged there, then reaches the iPhone that has the web
+      // one already.
+      final web = device([workout(day(5, hour: 11), sp: 30)]);
+      final android = device([workout(day(5, hour: 12), sp: 30)]);
+      final iphone = device([workout(day(5, hour: 11), sp: 30)]);
+      final androidMerged = merge(android, web).merged;
+      final iphoneMerged = merge(iphone, androidMerged).merged;
+      expect(essence(iphoneMerged), essence(androidMerged));
+      expect(logAt(iphoneMerged, day(5, hour: 11)).isPrimary, isTrue);
     });
 
     test('repeat workouts already there stay as they are', () {

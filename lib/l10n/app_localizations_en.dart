@@ -2605,6 +2605,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get progressImportFirstChosen =>
+      'The first workout of a day is chosen again: the one with more SP';
+
+  @override
   String get progressImportAdd => 'Add';
 
   @override
@@ -2682,6 +2686,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String progressHealthFailed(String store) {
     return 'Couldn\'t reach $store, nothing was added there.';
+  }
+
+  @override
+  String progressHealthNotWritten(String store) {
+    return 'Couldn\'t add the workouts to $store. Check that TreniDay may write workouts there.';
   }
 
   @override
