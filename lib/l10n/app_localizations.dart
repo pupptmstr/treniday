@@ -4242,6 +4242,156 @@ abstract class AppLocalizations {
   /// **'About'**
   String get settingsAbout;
 
+  /// No description provided for @settingsSectionData.
+  ///
+  /// In en, this message translates to:
+  /// **'YOUR DATA'**
+  String get settingsSectionData;
+
+  /// No description provided for @settingsExportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save progress to a file'**
+  String get settingsExportTitle;
+
+  /// No description provided for @settingsExportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'For a new phone, or to move from the web version to the app'**
+  String get settingsExportSubtitle;
+
+  /// No description provided for @settingsImportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add progress from a file'**
+  String get settingsImportTitle;
+
+  /// No description provided for @settingsImportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'It joins what is already here, nothing is lost'**
+  String get settingsImportSubtitle;
+
+  /// No description provided for @progressExportSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'TreniDay progress'**
+  String get progressExportSubject;
+
+  /// No description provided for @progressExportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save the file. Try again.'**
+  String get progressExportFailed;
+
+  /// No description provided for @progressImportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add this progress?'**
+  String get progressImportTitle;
+
+  /// No description provided for @progressImportIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'It joins what is here. Your settings stay as they are.'**
+  String get progressImportIntro;
+
+  /// No description provided for @progressImportWorkouts.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{+{count} workout} other{+{count} workouts}}'**
+  String progressImportWorkouts(int count);
+
+  /// No description provided for @progressImportSp.
+  ///
+  /// In en, this message translates to:
+  /// **'+{sp} SP'**
+  String progressImportSp(int sp);
+
+  /// No description provided for @progressImportRank.
+  ///
+  /// In en, this message translates to:
+  /// **'Rank: {from} → {to}'**
+  String progressImportRank(String from, String to);
+
+  /// No description provided for @progressImportStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{to, plural, one{Streak: {from} → {to} day} other{Streak: {from} → {to} days}}'**
+  String progressImportStreak(int from, int to);
+
+  /// No description provided for @progressImportBestStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'{to, plural, one{Best streak: {from} → {to} day} other{Best streak: {from} → {to} days}}'**
+  String progressImportBestStreak(int from, int to);
+
+  /// No description provided for @progressImportAchievements.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} new achievement: {names}} other{{count} new achievements: {names}}}'**
+  String progressImportAchievements(int count, String names);
+
+  /// No description provided for @progressImportStage.
+  ///
+  /// In en, this message translates to:
+  /// **'{branch}: stage {stage}'**
+  String progressImportStage(String branch, int stage);
+
+  /// No description provided for @progressImportMovedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} more branch moved on} other{{count} more branches moved on}}'**
+  String progressImportMovedOn(int count);
+
+  /// No description provided for @progressImportOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'Your routines, branches and courses: +{count}'**
+  String progressImportOwn(int count);
+
+  /// No description provided for @progressImportAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get progressImportAdd;
+
+  /// No description provided for @progressImportNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything in this file is already here.'**
+  String get progressImportNothing;
+
+  /// No description provided for @progressImportDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress added'**
+  String get progressImportDone;
+
+  /// No description provided for @progressImportNotOurs.
+  ///
+  /// In en, this message translates to:
+  /// **'This isn\'t a TreniDay progress file, or it is damaged.'**
+  String get progressImportNotOurs;
+
+  /// No description provided for @progressImportNewer.
+  ///
+  /// In en, this message translates to:
+  /// **'This file is from a newer version of TreniDay. Update the app and add the file again.'**
+  String get progressImportNewer;
+
+  /// No description provided for @progressImportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t add the progress. Nothing has changed.'**
+  String get progressImportFailed;
+
+  /// No description provided for @commonOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get commonOk;
+
   /// No description provided for @settingsSectionHealth.
   ///
   /// In en, this message translates to:
@@ -5819,6 +5969,12 @@ abstract class AppLocalizations {
   /// **'Friends are gone: without a server they could only swap a QR code once, and that was it. The app no longer needs the camera or Bluetooth.\nYour name: your host greets you by it on the home screen, and the profile and the end of a workout show it. Change it in Settings → Profile.\nFour new branches outside the courses: Strong Back, Glutes, Arms & Shoulders and Cardio — 22 exercises, each with Goro’s animation. Add them to your own course: Courses → + → Create your own course.'**
   String get releaseNotes095;
 
+  /// No description provided for @releaseNotes0911.
+  ///
+  /// In en, this message translates to:
+  /// **'Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.'**
+  String get releaseNotes0911;
+
   /// No description provided for @releaseNotes0910.
   ///
   /// In en, this message translates to:
@@ -5906,7 +6062,7 @@ abstract class AppLocalizations {
   /// No description provided for @releaseHistory09.
   ///
   /// In en, this message translates to:
-  /// **'New courses: Morning Routine with Aurora the lark, and Yoga with Miso the cat.\nHosts present the achievements of their course; shorter holds on each side.\nEvery exercise has an animation.\nYour own courses: built-in branches and branches of your own, made of exercises in your order.\nFriends removed; your host greets you by name.\nFour branches outside the courses: back, glutes, arms and shoulders, cardio.\nA sound for every moment of a workout, over your music.\nHome-screen widgets with Goro: Today, Goro, Streak and Rank; on iPhone on the lock screen too.\nA new name: CaliDay is now TreniDay.'**
+  /// **'New courses: Morning Routine with Aurora the lark, and Yoga with Miso the cat.\nHosts present the achievements of their course; shorter holds on each side.\nEvery exercise has an animation.\nYour own courses: built-in branches and branches of your own, made of exercises in your order.\nFriends removed; your host greets you by name.\nFour branches outside the courses: back, glutes, arms and shoulders, cardio.\nA sound for every moment of a workout, over your music.\nHome-screen widgets with Goro: Today, Goro, Streak and Rank; on iPhone on the lock screen too.\nA new name: CaliDay is now TreniDay.\nYour progress moves with a file: to a new phone, or from the web version to the app.'**
   String get releaseHistory09;
 }
 

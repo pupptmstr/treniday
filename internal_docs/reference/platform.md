@@ -119,6 +119,7 @@ Same Flutter app compiled for the browser; data stays local (Hive CE → **Index
 | Health | ❌ | Settings section + onboarding step hidden |
 | Home Screen Widget, widget deep links | ❌ | `main.dart` skips the whole post-frame native init; `WidgetService.update` no-op |
 | Orientation lock | ❌ | skipped in `main()` |
+| Progress file | ✅ | a download in a computer's browser, the share sheet (or a download) in a phone's; `file_selector` reads the picked file in the browser |
 
 ### Web-only UI
 - `_WebFrame` (`main.dart`, via `MaterialApp.router(builder:)`) — on wide windows the app renders in a centred 480 px column over `AppTheme.heroGradient`; `MediaQuery.size` is overridden to the column size.
@@ -127,6 +128,17 @@ Same Flutter app compiled for the browser; data stays local (Hive CE → **Index
 
 ### Caveats
 - Data is per browser/origin; clearing site data wipes progress. Safari may evict storage of sites not added to the Home Screen after 7 days without a visit — on iOS, install via Share → Add to Home Screen.
+
+## Progress file (0.9.11)
+
+Settings → **Your data** (every platform): "Save progress to a file" and "Add progress from a file" — moving to a new phone, or from the web version to the app (owner, 2026-10-13: the import **merges**, never replaces). Spec and the decisions: [specs/progress-export.md](../specs/progress-export.md).
+
+- **The file** — `ProgressFile` (`lib/data/progress_file.dart`): `treniday-progress-<date>.json`, JSON of our own written field by field (`app: "treniday"`, `formatVersion` 1, `appVersion`, `exportedAt`, then the profile, skill progress, workouts, achievements, own routines / branches / courses). Enums by name, dates as the local date and time to the millisecond (Hive keeps milliseconds). A newer `formatVersion`, or a branch / course / rank / set type / stage this version cannot hold, refuses the file as `newerApp` ("update the app"); a newer `appVersion` alone does not (the web build is usually ahead of the store app). Unknown exercise and achievement ids are kept. `ProgressFile.copy` is the deep copy everything else builds on.
+- **The data** — `ProgressStore` (`data/repositories/progress_store.dart`): `read()` gives a `ProgressSnapshot` (`domain/models/progress_snapshot.dart`) of copies of all seven boxes; `replace(next, previous:)` writes every box (logs cleared and re-added: their auto-increment keys mean nothing), and on a failed write writes `previous` back — Hive has no transaction across boxes.
+- **The merge** — `ProgressMerge.merge(local, imported, now:)` (`domain/services/progress_merge.dart`), pure, idempotent; rules in [progression.md § Progress merge](progression.md#progress-merge-0911). It returns the merged snapshot, a `ProgressMergeSummary` for the confirmation, and `changesAnything` (the merged file text differs from this device's).
+- **Moving the file** — `ProgressFileService` (`core/services/progress_file_service.dart`, the thin plugin layer): export through `share_plus` on iOS / Android and in a phone's browser (it falls back to a download when the browser cannot share files), a plain download (`file_download_web.dart`, `package:web`) in a computer's browser; import through `file_selector` — iOS filters `public.json`, the web `.json`, Android shows every file (its picker filters by MIME type and a JSON saved from a messenger often comes as `application/octet-stream`; a file that is not ours is refused when read). `file_selector` rather than `file_picker`: the iOS document picker without photo-library code, so no new purpose strings for the App Store.
+- **The flow** — `features/settings/progress_transfer.dart`: export builds the file from `ProgressStore.read()` with `ReleaseNotesCatalog.latest.version` as `appVersion` (synchronous, so the browser's share keeps the tap's user activation); import picks → decodes → merges → "Everything in this file is already here" or a dialog listing the changes (`importSummaryLines`) → on Add writes, then invalidates the providers that read the boxes, pushes the widgets and re-plans the notifications.
+- Checked in the web build (debug, `web-server`): the download's name and JSON, the confirmation, the profile and Home after the merge, the same file again, a file that is not ours, a newer format. The pickers and the share sheet were stubbed in the page (the pane cannot drive native dialogs); the Android debug APK and the iOS simulator build compile with both plugins.
 
 ## Landing page (0.9.8)
 

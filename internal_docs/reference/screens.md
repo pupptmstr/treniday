@@ -16,7 +16,7 @@
 - `/branch/:branchId` — branch progression journey, by `Branch.key` (a built-in name or `custom_<id>`)
 - `/achievements` — all achievements
 - `/calendar` — workout calendar heatmap (month grid + day-detail sheet)
-- `/settings` — settings
+- `/settings` — settings; its **Your data** section (0.9.11) saves the progress to a file and adds one (`features/settings/progress_transfer.dart`, [platform.md § Progress file](platform.md#progress-file-0911))
 - `/whats-new` — "What's new": the history of what changed in each version (bell in the Profile app bar, with a dot while an entry is unseen)
 - `/about` — about the app
 - `/dev-options` — devtools (`kDebugMode` only)

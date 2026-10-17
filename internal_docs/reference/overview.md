@@ -43,6 +43,8 @@ lib/
 │   │   ├── sound_service.dart         ← SoundService singleton
 │   │   ├── health_service.dart        ← HealthService singleton (plugin calls only; the energy / weight logic is WorkoutEnergy)
 │   │   ├── widget_service.dart        ← WidgetService singleton: writes a snapshot for the native widgets and redraws every kind
+│   │   ├── progress_file_service.dart ← ProgressFileService: the progress file out (share sheet / download) and in (file_selector) — plugin calls only
+│   │   ├── file_download.dart         ← downloadFile(): a download in the browser (file_download_web.dart; a stub elsewhere)
 │   │   └── widget_snapshot.dart       ← WidgetSnapshot.build: what the home-screen widgets show, every text from the ARB files (pure)
 │   ├── providers/
 │   │   ├── locale_provider.dart       ← LocaleNotifier (NotifierProvider<LocaleNotifier, String>)
@@ -75,7 +77,9 @@ lib/
 │   │   ├── workout_repository.dart
 │   │   ├── achievement_repository.dart
 │   │   ├── custom_routine_repository.dart ← CustomRoutineRepository + CustomRoutinesNotifier + customRoutinesProvider
-│   │   └── custom_course_repository.dart ← own branches and courses: repositories + customBranchesProvider / customCoursesProvider
+│   │   ├── custom_course_repository.dart ← own branches and courses: repositories + customBranchesProvider / customCoursesProvider
+│   │   └── progress_store.dart        ← ProgressStore: all seven boxes as one ProgressSnapshot (read copies, replace with a merged one)
+│   ├── progress_file.dart             ← ProgressFile: the progress file's JSON (encode / decode with checks, copy)
 │   ├── retired_boxes.dart             ← deleteRetiredBoxes(): the boxes of removed features (`friends`), deleted at start-up
 │   └── static/
 │       ├── exercise_catalog.dart      ← Push(7)+Pull(6)+Core(6)+Legs(5)+Balance(6)+Flex(6)+Posture(6)+Neck(5) + warmup/cooldown; `libraryAll` getter
@@ -89,6 +93,7 @@ lib/
 │   ├── models/workout_plan.dart       ← WorkoutPlan (+ the time estimate), PlannedExercise, the get-ready constants (`prepSecFor`)
 │   ├── models/branch.dart             ← Branch: BuiltInBranch (a BranchId) | OwnBranch (a CustomBranch); what every trainer of a branch uses
 │   ├── models/course.dart             ← Course: BuiltInCourse (a CourseId) | OwnCourse (a CustomCourse)
+│   ├── models/progress_snapshot.dart  ← ProgressSnapshot: everything about the user's training as one value (a file, a merge)
 │   └── services/
 │       ├── sp_service.dart
 │       ├── streak_service.dart
@@ -101,6 +106,7 @@ lib/
 │       ├── workout_progression.dart   ← WorkoutProgression: what a finished workout does to the branches, and its `growth` (pure)
 │       ├── home_digest.dart           ← HomeDigest: the middle of Home — the nearest achievement, the next rank, the growth of a day, the host's line of the day (pure)
 │       ├── workout_generator_service.dart
+│       ├── progress_merge.dart        ← ProgressMerge: a progress file joined into this device's (pure, idempotent) + the summary for the confirmation
 │       └── achievement_service.dart
 └── features/
     ├── home/
@@ -143,6 +149,7 @@ lib/
     │       └── workout_log_tile.dart      ← WorkoutLogTile + ExerciseTagChip (shared across Profile, Calendar, Home)
     ├── settings/
     │   ├── providers/settings_provider.dart
+    │   ├── progress_transfer.dart     ← exportProgress / importProgress: Settings → Your data (pick, confirm with importSummaryLines, write, refresh)
     │   ├── widgets/goro_poses.dart    ← GoroPoses (About: a random pose of kGoroPoses, a tap shows the next)
     │   └── screens/
     │       ├── settings_screen.dart

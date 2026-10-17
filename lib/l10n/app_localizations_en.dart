@@ -2500,6 +2500,136 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAbout => 'About';
 
   @override
+  String get settingsSectionData => 'YOUR DATA';
+
+  @override
+  String get settingsExportTitle => 'Save progress to a file';
+
+  @override
+  String get settingsExportSubtitle =>
+      'For a new phone, or to move from the web version to the app';
+
+  @override
+  String get settingsImportTitle => 'Add progress from a file';
+
+  @override
+  String get settingsImportSubtitle =>
+      'It joins what is already here, nothing is lost';
+
+  @override
+  String get progressExportSubject => 'TreniDay progress';
+
+  @override
+  String get progressExportFailed => 'Couldn\'t save the file. Try again.';
+
+  @override
+  String get progressImportTitle => 'Add this progress?';
+
+  @override
+  String get progressImportIntro =>
+      'It joins what is here. Your settings stay as they are.';
+
+  @override
+  String progressImportWorkouts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '+$count workouts',
+      one: '+$count workout',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportSp(int sp) {
+    return '+$sp SP';
+  }
+
+  @override
+  String progressImportRank(String from, String to) {
+    return 'Rank: $from → $to';
+  }
+
+  @override
+  String progressImportStreak(int from, int to) {
+    String _temp0 = intl.Intl.pluralLogic(
+      to,
+      locale: localeName,
+      other: 'Streak: $from → $to days',
+      one: 'Streak: $from → $to day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportBestStreak(int from, int to) {
+    String _temp0 = intl.Intl.pluralLogic(
+      to,
+      locale: localeName,
+      other: 'Best streak: $from → $to days',
+      one: 'Best streak: $from → $to day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportAchievements(int count, String names) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new achievements: $names',
+      one: '$count new achievement: $names',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportStage(String branch, int stage) {
+    return '$branch: stage $stage';
+  }
+
+  @override
+  String progressImportMovedOn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more branches moved on',
+      one: '$count more branch moved on',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportOwn(int count) {
+    return 'Your routines, branches and courses: +$count';
+  }
+
+  @override
+  String get progressImportAdd => 'Add';
+
+  @override
+  String get progressImportNothing =>
+      'Everything in this file is already here.';
+
+  @override
+  String get progressImportDone => 'Progress added';
+
+  @override
+  String get progressImportNotOurs =>
+      'This isn\'t a TreniDay progress file, or it is damaged.';
+
+  @override
+  String get progressImportNewer =>
+      'This file is from a newer version of TreniDay. Update the app and add the file again.';
+
+  @override
+  String get progressImportFailed =>
+      'Couldn\'t add the progress. Nothing has changed.';
+
+  @override
+  String get commonOk => 'OK';
+
+  @override
   String get settingsSectionHealth => 'HEALTH';
 
   @override
@@ -3531,6 +3661,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Friends are gone: without a server they could only swap a QR code once, and that was it. The app no longer needs the camera or Bluetooth.\nYour name: your host greets you by it on the home screen, and the profile and the end of a workout show it. Change it in Settings → Profile.\nFour new branches outside the courses: Strong Back, Glutes, Arms & Shoulders and Cardio — 22 exercises, each with Goro’s animation. Add them to your own course: Courses → + → Create your own course.';
 
   @override
+  String get releaseNotes0911 =>
+      'Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.';
+
+  @override
   String get releaseNotes0910 =>
       'Want TreniDay as an Android app? In the web version on an Android phone, About invites you to become a tester: Google Play lets a new app in after 12 people have tested it for two weeks.\nThe Apple Health permission requests speak your language.\nOn Android, the privacy policy link in Health Connect opens the policy.';
 
@@ -3588,5 +3722,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get releaseHistory09 =>
-      'New courses: Morning Routine with Aurora the lark, and Yoga with Miso the cat.\nHosts present the achievements of their course; shorter holds on each side.\nEvery exercise has an animation.\nYour own courses: built-in branches and branches of your own, made of exercises in your order.\nFriends removed; your host greets you by name.\nFour branches outside the courses: back, glutes, arms and shoulders, cardio.\nA sound for every moment of a workout, over your music.\nHome-screen widgets with Goro: Today, Goro, Streak and Rank; on iPhone on the lock screen too.\nA new name: CaliDay is now TreniDay.';
+      'New courses: Morning Routine with Aurora the lark, and Yoga with Miso the cat.\nHosts present the achievements of their course; shorter holds on each side.\nEvery exercise has an animation.\nYour own courses: built-in branches and branches of your own, made of exercises in your order.\nFriends removed; your host greets you by name.\nFour branches outside the courses: back, glutes, arms and shoulders, cardio.\nA sound for every moment of a workout, over your music.\nHome-screen widgets with Goro: Today, Goro, Streak and Rank; on iPhone on the lock screen too.\nA new name: CaliDay is now TreniDay.\nYour progress moves with a file: to a new phone, or from the web version to the app.';
 }

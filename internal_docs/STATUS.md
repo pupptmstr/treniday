@@ -2,7 +2,7 @@
 
 > Part of the project notes — the index is [README.md](README.md). Updated with every branch.
 
-**Version:** 0.9.10 on branch `session/2026-10-13-store-fixes` (what the stores check on upload; iPhone only; Android testers wanted), waiting for the owner's go. `main` has 0.9.9. The owner keeps the version at 0.9.x until they call it 1.0.
+**Version:** 0.9.11 on branch `session/2026-10-17-progress-export` (the progress file: save it, add one from another device, merged), waiting for the owner's go. `main` has 0.9.10. The owner keeps the version at 0.9.x until they call it 1.0.
 
 ## What the app has
 
@@ -12,7 +12,7 @@
 | Exercises | 155 animated (`tools/lottie`) — [tooling.md](reference/tooling.md) |
 | Game | SP, streaks and freezes, ranks with decay, 45 achievements, challenges with Skala, five course hosts — [progression.md](reference/progression.md) |
 | Workout | hands-free holds (get-ready, sides), 21 sound cues, time estimate at the user's pace — [workout.md](reference/workout.md) |
-| Screens | Home (host's line, goals, plan in the button), Courses, Profile, What's new, calendar — [screens.md](reference/screens.md) |
+| Screens | Home (host's line, goals, plan in the button), Courses, Profile, What's new, calendar; Settings → Your data (the progress to a file and back, merged) — [screens.md](reference/screens.md) |
 | Platforms | iOS (primary), Android, web (PWA); notifications, Apple Health / Health Connect, four home-screen widgets + iOS lock screen — [platform.md](reference/platform.md) |
 | Website | landing page at `pupptmstr.github.io/treniday/` in the app's four languages — [platform.md](reference/platform.md#landing-page-098) |
 | Languages | Russian, English; German and Spanish as drafts |
@@ -33,7 +33,7 @@
 | "Support the author" (in-app purchase) — tax / legal set-up first | [research/support-the-author.md](research/support-the-author.md) |
 | Rounded / oval frames for the exercise animations (owner: later) | — |
 | iPad support with a wide layout (owner, 2026-10-13: after 1.0, which is iPhone only) | [platform.md § iOS specifics](reference/platform.md#ios-specifics) |
-| Progress export / import through a file, **merged** into what the device has — a new phone, web → app (owner, 2026-10-13) | [specs/progress-export.md](specs/progress-export.md) |
+| Progress file: **built in 0.9.11**; open — offer to add the imported workouts to Apple Health / Health Connect (needs a workout read permission, changes the store's Health answers) | [specs/progress-export.md](specs/progress-export.md) |
 
 **Parked or declined, do not propose:** the Telegram Mini App + bot ([research/telegram-mini-app.md](research/telegram-mini-app.md)); iPhone Safari haptics through the switch-checkbox trick; vibration patterns of our own ([research/vibration-patterns.md](research/vibration-patterns.md)); Rex, the streak monkey; a visit counter on the site (Search Console is enough); a redirect from the old `/caliday/` address — all the owner's, 2026-10-13 for the last four.
 

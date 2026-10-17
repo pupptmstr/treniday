@@ -1,6 +1,6 @@
 # Privacy Policy — TreniDay
 
-**Last updated: October 13, 2026**
+**Last updated: October 17, 2026**
 
 ---
 
@@ -15,7 +15,8 @@ This policy explains what information the app uses and how it stays on your devi
 
 There are no accounts, no sign-up, no cloud sync. Everything you do in the app —
 workouts, progress, streak, settings — is stored locally on your device using
-on-device storage (Hive). This data never leaves your device.
+on-device storage (Hive). This data never leaves your device unless you save it to a file
+yourself (see "Progress file" below).
 
 ---
 
@@ -33,6 +34,15 @@ The following data is stored **on your device only**:
 | Saved routines | Custom workouts you've built |
 
 All of this data is deleted when you uninstall the app.
+
+### Progress file
+
+In Settings → Your data you can save your progress to a file, to move it to a new phone or from
+the web version to the app. The file holds everything listed above (your name, workout history,
+skill progress, streak, SP, achievements, settings and your own routines, branches and courses).
+It is made on your device and goes only where you send it — a folder, a message to yourself,
+another device. TreniDay never sends it anywhere. Adding a file in the app merges its progress into
+what the device already has; nothing is uploaded.
 
 Versions before 0.9.5 had a Friends feature that exchanged a profile snapshot with another
 person by QR code or Bluetooth. It has been removed: the friends list stored on your device is

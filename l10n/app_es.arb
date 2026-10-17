@@ -930,6 +930,109 @@
   "releaseNotes0811": "El tamaño del entrenamiento sustituye a «5, 10 o 15 minutos»: Corto, Estándar o Completo. Indica cuántas habilidades incluye un entrenamiento, no cuánto dura.",
   "releaseNotes0810": "Los ejercicios por tiempo ahora empiezan solos tras una breve cuenta atrás para prepararte. Toca Pausa si necesitas más tiempo para leer o colocarte.\nLa búsqueda en la biblioteca de ejercicios funciona en ruso y en inglés.\nAlgunos textos que se habían quedado en un solo idioma ya están traducidos.",
   "settingsAbout": "Acerca de",
+  "settingsSectionData": "TUS DATOS",
+  "settingsExportTitle": "Guardar el progreso en un archivo",
+  "settingsExportSubtitle": "Para un teléfono nuevo o para pasar de la versión web a la app",
+  "settingsImportTitle": "Añadir el progreso de un archivo",
+  "settingsImportSubtitle": "Se une a lo que ya hay aquí, no se pierde nada",
+  "progressExportSubject": "Progreso de TreniDay",
+  "progressExportFailed": "No se pudo guardar el archivo. Inténtalo de nuevo.",
+  "progressImportTitle": "¿Añadir este progreso?",
+  "progressImportIntro": "Se une a lo que hay aquí. Tus ajustes se quedan como están.",
+  "progressImportWorkouts": "{count, plural, one{+{count} entrenamiento} other{+{count} entrenamientos}}",
+  "@progressImportWorkouts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportSp": "+{sp} SP",
+  "@progressImportSp": {
+    "placeholders": {
+      "sp": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportRank": "Rango: {from} → {to}",
+  "@progressImportRank": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "progressImportStreak": "{to, plural, one{Racha: {from} → {to} día} other{Racha: {from} → {to} días}}",
+  "@progressImportStreak": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportBestStreak": "{to, plural, one{Mejor racha: {from} → {to} día} other{Mejor racha: {from} → {to} días}}",
+  "@progressImportBestStreak": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportAchievements": "{count, plural, one{{count} logro nuevo: {names}} other{{count} logros nuevos: {names}}}",
+  "@progressImportAchievements": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "progressImportStage": "{branch}: etapa {stage}",
+  "@progressImportStage": {
+    "placeholders": {
+      "branch": {
+        "type": "String"
+      },
+      "stage": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportMovedOn": "{count, plural, one{{count} rama más ha avanzado} other{{count} ramas más han avanzado}}",
+  "@progressImportMovedOn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportOwn": "Tus rutinas, ramas y cursos: +{count}",
+  "@progressImportOwn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportAdd": "Añadir",
+  "progressImportNothing": "Todo lo de este archivo ya está aquí.",
+  "progressImportDone": "Progreso añadido",
+  "progressImportNotOurs": "No es un archivo de progreso de TreniDay o está dañado.",
+  "progressImportNewer": "Este archivo es de una versión más nueva de TreniDay. Actualiza la app y vuelve a añadir el archivo.",
+  "progressImportFailed": "No se pudo añadir el progreso. No ha cambiado nada.",
+  "commonOk": "Aceptar",
   "settingsSectionHealth": "SALUD",
   "settingsHealthWorkoutsTitle": "Registrar entrenamientos",
   "settingsHealthWorkoutsSubtitle": "Guardar en Apple Health / Health Connect",
@@ -1470,6 +1573,7 @@
   "whatsNewHistory": "Historial de versiones",
   "releaseNotes094": "Tus cursos ya están en la lista de cursos bajo +: desmarca uno para ocultarlo de la fila de arriba (se guarda), el lápiz lo abre para editarlo.\nUn curso propio lleva arriba una marca de herramientas en vez de la cara de su anfitrión.\nUn logro aún pendiente: su anfitrión ahora lo sostiene, una medalla gris con candado.\n«Acerca de»: toca a Goro, tiene algunas poses nuevas.\nPantalla principal: antes del primer entrenamiento del día tu anfitrión te dice unas palabras (cada uno las suyas, nuevas cada vez que abres la app o las tocas), y debajo están tus próximas metas (el siguiente rango, el logro más cercano, un reto abierto que puedes empezar ahí mismo) y las ramas del curso.\nDespués, la pantalla principal muestra tus últimos entrenamientos y lo que ha crecido hoy: más repeticiones, una serie, menos descanso, una etapa nueva.\nLa flecha del botón de entrenamiento despliega el plan del día, con Goro mostrando cada ejercicio.\nLas animaciones de Goro dondequiera que se nombra un ejercicio: el camino de una rama, la pestaña Cursos, los constructores, los entrenamientos guardados, el historial, el descanso antes del siguiente ejercicio.",
   "releaseNotes095": "Ya no hay amigos: sin servidor solo podían intercambiar un código QR una vez y nada más. La app ya no necesita la cámara ni el Bluetooth.\nTu nombre: tu anfitrión te saluda con él en la pantalla de inicio, y el perfil y el final del entrenamiento lo muestran. Cámbialo en Ajustes → Perfil.\nCuatro ramas nuevas fuera de los cursos: Espalda fuerte, Glúteos, Brazos y hombros y Cardio: 22 ejercicios, cada uno con la animación de Goro. Añádelas a tu propio curso: Cursos → + → Crear tu propio curso.",
+  "releaseNotes0911": "Llévate tu progreso: Ajustes → Tus datos → «Guardar el progreso en un archivo» y, en el otro dispositivo, «Añadir el progreso de un archivo». Se une a lo que ya hay: los entrenamientos, los SP, la racha, las etapas y los logros de ambos, sin perder nada. De la versión web a la app o a un teléfono nuevo.\nSi hubo un entrenamiento en los dos dispositivos el mismo día, el de más SP sigue siendo el primero del día y el otro cuenta como entrenamiento extra.",
   "releaseNotes0910": "¿Quieres TreniDay como app para Android? En la versión web en un móvil Android, «Acerca de» te invita a ser probador: Google Play admite una app nueva cuando 12 personas la han probado durante dos semanas.\nLas solicitudes de acceso a Apple Health están en tu idioma.\nEn Android, el enlace a la política de privacidad en Health Connect abre la política.",
   "releaseNotes099": "CaliDay ahora se llama TreniDay: un nombre nuevo, el mismo Goro y todo tu progreso.\nLa versión web se ha mudado a pupptmstr.github.io/treniday/app: ábrela en el mismo navegador y tu progreso seguirá ahí.",
   "releaseNotes098": "La versión web en el iPhone ya reproduce todos los sonidos del entrenamiento — los tics, el inicio de un aguante, el cambio de lado, el final del descanso —, no solo los que siguen a un toque.\nTreniDay tiene sitio web: pupptmstr.github.io/treniday — todo sobre la app en cuatro idiomas.",
@@ -1484,5 +1588,5 @@
   "releaseHistory06": "La biblioteca de ejercicios: todos los ejercicios, con búsqueda y filtros.\nToca la racha, el rango o los protectores en el perfil para ver qué significan.",
   "releaseHistory07": "Tus propios entrenamientos: elige ejercicios y guárdalos como rutina, o empieza una rápida por enfoque.\nAnimaciones para las etapas de equilibrio.\nLa política de privacidad y las condiciones de uso.",
   "releaseHistory08": "Las estadísticas de la pantalla de inicio abren el calendario, el historial y los rangos; un calendario de entrenamientos.\nEl rango baja tras pausas largas y vuelve con el entrenamiento.\nTreniDay en el navegador: la versión web.\nAnimaciones para cada ejercicio de los primeros cursos.\nLos ejercicios por tiempo empiezan solos tras una cuenta atrás corta; los de un lado se hacen a ambos.\nLos entrenamientos son Corto, Estándar o Completo, con una estimación del tiempo que aprende tu ritmo.\n«Novedades» en la campana del perfil; alemán y español.\nCada habilidad avanza una vez al día, en cualquier entrenamiento.\nUn curso nuevo, Estiramiento nocturno, y un anfitrión para cada curso.",
-  "releaseHistory09": "Cursos nuevos: Rutina matutina con la alondra Aurora y Yoga con el gato Miso.\nLos anfitriones entregan los logros de su curso; ejercicios por lado más cortos.\nCada ejercicio tiene una animación.\nTus propios cursos: con ramas ya hechas y ramas tuyas, hechas de ejercicios en tu orden.\nSe quitan los amigos; tu anfitrión te saluda por tu nombre.\nCuatro ramas fuera de los cursos: espalda, glúteos, brazos y hombros, cardio.\nUn sonido para cada momento del entrenamiento, sobre tu música.\nWidgets con Goro: Hoy, Goro, Racha y Rango; en el iPhone, también en la pantalla de bloqueo.\nUn nombre nuevo: CaliDay ahora es TreniDay."
+  "releaseHistory09": "Cursos nuevos: Rutina matutina con la alondra Aurora y Yoga con el gato Miso.\nLos anfitriones entregan los logros de su curso; ejercicios por lado más cortos.\nCada ejercicio tiene una animación.\nTus propios cursos: con ramas ya hechas y ramas tuyas, hechas de ejercicios en tu orden.\nSe quitan los amigos; tu anfitrión te saluda por tu nombre.\nCuatro ramas fuera de los cursos: espalda, glúteos, brazos y hombros, cardio.\nUn sonido para cada momento del entrenamiento, sobre tu música.\nWidgets con Goro: Hoy, Goro, Racha y Rango; en el iPhone, también en la pantalla de bloqueo.\nUn nombre nuevo: CaliDay ahora es TreniDay.\nTu progreso se pasa con un archivo: a un teléfono nuevo o de la versión web a la app."
 }

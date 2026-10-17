@@ -6,6 +6,21 @@ One entry per version, newest first: what changed, what the owner decided, and t
 
 ---
 
+## 0.9.11 — 2026-10-17 — Progress moves by a file, and adding one merges
+
+Branch `session/2026-10-17-progress-export`.
+
+**Settings → Your data** (owner's idea of 2026-10-13, [specs/progress-export.md](specs/progress-export.md)): "Save progress to a file" and "Add progress from a file" on every platform — to a new phone, or from the web version to the app. Adding a file **merges** it into what the device has: one history with the workouts of both, their SP, one streak over both devices' days, the further stage of each branch, every achievement, own routines, branches and courses of both; this device's settings stay. A confirmation lists what will change ("+4 workouts, +600 SP, Rank: Beginner → Amateur, Streak: 0 → 4 days, Push: stage 3, 3 new achievements: …"); a file with nothing new says so; the same file again changes nothing — [platform.md § Progress file](reference/platform.md#progress-file-0911), [progression.md § Progress merge](reference/progression.md#progress-merge-0911).
+- **The owner's rule for a day trained on both devices** (2026-10-17): the first workout with more SP keeps its full SP; the other becomes a repeat (bonus) workout and its SP is counted again the way a repeat one earns it. The owner had first said to keep both as earned ("a little more is fine"), then changed it mid-build to this fair count.
+- **The file:** JSON of our own (`ProgressFile`), enums by name, dates as the local time to the millisecond. A workout is known by the time it **ended** (the spec said "start": `_finishWorkout` writes `now` at the end) with its course and length. Hive keeps milliseconds while a log still in memory has microseconds — without cutting them, a workout exported right after training and imported back would have come in twice.
+- **A newer app's file** is refused only for what this version cannot hold (a format version, branch, course, rank, set type or stage it does not know), not for its version number as the spec had it: the web build deploys with every merge and is usually ahead of the store app, so the main case, web → app, would have been refused. Unknown exercise and achievement ids are kept (old devices hold retired Friends achievements; the screens skip unknown ids).
+- **The streak** is replayed from the merged days only when the file adds workouts, and never drops below what a device's profile knew of its last day (logs from before a field existed may not add up); the calendar's freeze marks follow the replay (a day filled in by the other device gives the freeze back).
+- **Packages:** `share_plus` (on the web it falls back to a download by itself) and `file_selector` — flutter.dev's picker, chosen over `file_picker`, whose iOS pod carries photo-library code that the App Store asks purpose strings for. A computer's browser gets a plain download (`package:web`), a phone's the share sheet. On Android the picker shows every file: it filters by MIME type, and a JSON saved from a messenger often comes as `application/octet-stream`. Context7 was not available; the APIs were read from the packages' sources. The Android debug APK (AGP 8.11.1, although `share_plus` names 8.12.1) and the iOS simulator build compile.
+- **Checked** in the web build: the download's name and content, the confirmation, Profile and Home after the merge without a restart, the same file again, a foreign file, a newer format. The browser pane cannot drive native pickers, so the file input and the download were stubbed in the page.
+- The privacy policy has a "Progress file" part: the file holds the progress and goes only where the user sends it.
+- **Not built: the Health offer** of the spec (add the imported workouts to Apple Health / Health Connect, skipping those already there). It needs a new read permission for workouts, which changes the Health Connect declaration and the store answers prepared in 0.9.10 — left to the owner.
+- The 0.9 line of the version history now reaches this release (a test checks it) and names the progress file.
+
 ## 0.9.10 — 2026-10-13 — Ready for the stores; Android testers wanted
 
 Branch `session/2026-10-13-store-fixes`.

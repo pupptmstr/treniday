@@ -2,7 +2,7 @@ name: treniday
 description: "TreniDay — home calisthenics workouts with streak tracking and gamification."
 publish_to: 'none'
 
-version: 0.9.10+40
+version: 0.9.11+41
 
 environment:
   sdk: ^3.11.0
@@ -38,6 +38,8 @@ dependencies:
 
   # Здоровье (Apple Health / Google Health Connect)
   health: ^13.3.1
+  share_plus: ^13.3.1
+  file_selector: ^1.1.0
 
 dev_dependencies:
   flutter_test:

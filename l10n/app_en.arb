@@ -930,6 +930,109 @@
   "releaseNotes0811": "Workout size replaces “5, 10 or 15 minutes”: Short, Standard or Full. It sets how many skills a workout covers, not how long it lasts.",
   "releaseNotes0810": "Timed exercises now start by themselves after a short “get ready” countdown. Tap Pause if you need more time to read or take position.\nSearch in the exercise library works in Russian and English.\nA few texts that stayed in one language are translated.",
   "settingsAbout": "About",
+  "settingsSectionData": "YOUR DATA",
+  "settingsExportTitle": "Save progress to a file",
+  "settingsExportSubtitle": "For a new phone, or to move from the web version to the app",
+  "settingsImportTitle": "Add progress from a file",
+  "settingsImportSubtitle": "It joins what is already here, nothing is lost",
+  "progressExportSubject": "TreniDay progress",
+  "progressExportFailed": "Couldn't save the file. Try again.",
+  "progressImportTitle": "Add this progress?",
+  "progressImportIntro": "It joins what is here. Your settings stay as they are.",
+  "progressImportWorkouts": "{count, plural, one{+{count} workout} other{+{count} workouts}}",
+  "@progressImportWorkouts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportSp": "+{sp} SP",
+  "@progressImportSp": {
+    "placeholders": {
+      "sp": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportRank": "Rank: {from} → {to}",
+  "@progressImportRank": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "progressImportStreak": "{to, plural, one{Streak: {from} → {to} day} other{Streak: {from} → {to} days}}",
+  "@progressImportStreak": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportBestStreak": "{to, plural, one{Best streak: {from} → {to} day} other{Best streak: {from} → {to} days}}",
+  "@progressImportBestStreak": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportAchievements": "{count, plural, one{{count} new achievement: {names}} other{{count} new achievements: {names}}}",
+  "@progressImportAchievements": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "progressImportStage": "{branch}: stage {stage}",
+  "@progressImportStage": {
+    "placeholders": {
+      "branch": {
+        "type": "String"
+      },
+      "stage": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportMovedOn": "{count, plural, one{{count} more branch moved on} other{{count} more branches moved on}}",
+  "@progressImportMovedOn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportOwn": "Your routines, branches and courses: +{count}",
+  "@progressImportOwn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "progressImportAdd": "Add",
+  "progressImportNothing": "Everything in this file is already here.",
+  "progressImportDone": "Progress added",
+  "progressImportNotOurs": "This isn't a TreniDay progress file, or it is damaged.",
+  "progressImportNewer": "This file is from a newer version of TreniDay. Update the app and add the file again.",
+  "progressImportFailed": "Couldn't add the progress. Nothing has changed.",
+  "commonOk": "OK",
   "settingsSectionHealth": "HEALTH",
   "settingsHealthWorkoutsTitle": "Record workouts",
   "settingsHealthWorkoutsSubtitle": "Save to Apple Health / Health Connect",
@@ -1470,6 +1573,7 @@
   "whatsNewHistory": "Version history",
   "releaseNotes094": "Your own courses are in the course list under +: untick one to hide it from the row at the top (it is kept), the pencil opens it for editing.\nAn own course carries a hand-tool mark in the row at the top instead of its host's face.\nAn achievement still ahead: its host now holds it, a grey medal with a padlock.\nAbout: tap Goro, he has a few new poses.\nHome screen: before the first workout of the day your host has a word for you (each host its own, a new one every time you open the app or tap it), and below are your next goals (the next rank, the nearest achievement, an open challenge you can start right there) and the branches of the course.\nAfter it, the home screen shows your latest workouts and what grew today: more reps, a set, less rest, a new stage.\nThe arrow on the workout button unfolds today's plan, with Goro showing every exercise.\nGoro's animations wherever an exercise is named: the path of a branch, the Courses tab, the builders, saved workouts, the history, the rest before the next exercise.",
   "releaseNotes095": "Friends are gone: without a server they could only swap a QR code once, and that was it. The app no longer needs the camera or Bluetooth.\nYour name: your host greets you by it on the home screen, and the profile and the end of a workout show it. Change it in Settings → Profile.\nFour new branches outside the courses: Strong Back, Glutes, Arms & Shoulders and Cardio — 22 exercises, each with Goro’s animation. Add them to your own course: Courses → + → Create your own course.",
+  "releaseNotes0911": "Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.",
   "releaseNotes0910": "Want TreniDay as an Android app? In the web version on an Android phone, About invites you to become a tester: Google Play lets a new app in after 12 people have tested it for two weeks.\nThe Apple Health permission requests speak your language.\nOn Android, the privacy policy link in Health Connect opens the policy.",
   "releaseNotes099": "CaliDay is now TreniDay: a new name, the same Goro and all your progress.\nThe web version has moved to pupptmstr.github.io/treniday/app — open it in the same browser and your progress is there.",
   "releaseNotes098": "The web version on iPhone now plays every workout sound — the ticks, the start of a hold, switch sides, the end of a rest — not only the ones that follow a tap.\nTreniDay has a website: pupptmstr.github.io/treniday — what the app is about, in four languages.",
@@ -1484,5 +1588,5 @@
   "releaseHistory06": "The exercise library: every exercise, with search and filters.\nTap the streak, the rank or the freezes in the profile to see what they mean.",
   "releaseHistory07": "Your own workouts: pick exercises and save them as a routine, or start a quick one by focus.\nAnimations for the balance stages.\nThe privacy policy and the terms of use.",
   "releaseHistory08": "The stats on the home screen open the calendar, the history and the ranks; a workout calendar.\nA rank slips after long breaks and comes back with training.\nTreniDay in the browser: the web version.\nAnimations for every exercise of the first courses.\nTimed holds start by themselves after a short countdown; a hold on one side runs on both.\nWorkouts are Short, Standard or Full, with an estimate of the time that learns your pace.\n“What's new” under the bell in the profile; German and Spanish.\nEvery skill moves on once a day, in any workout.\nA new course, Evening Stretch, and a host for every course.",
-  "releaseHistory09": "New courses: Morning Routine with Aurora the lark, and Yoga with Miso the cat.\nHosts present the achievements of their course; shorter holds on each side.\nEvery exercise has an animation.\nYour own courses: built-in branches and branches of your own, made of exercises in your order.\nFriends removed; your host greets you by name.\nFour branches outside the courses: back, glutes, arms and shoulders, cardio.\nA sound for every moment of a workout, over your music.\nHome-screen widgets with Goro: Today, Goro, Streak and Rank; on iPhone on the lock screen too.\nA new name: CaliDay is now TreniDay."
+  "releaseHistory09": "New courses: Morning Routine with Aurora the lark, and Yoga with Miso the cat.\nHosts present the achievements of their course; shorter holds on each side.\nEvery exercise has an animation.\nYour own courses: built-in branches and branches of your own, made of exercises in your order.\nFriends removed; your host greets you by name.\nFour branches outside the courses: back, glutes, arms and shoulders, cardio.\nA sound for every moment of a workout, over your music.\nHome-screen widgets with Goro: Today, Goro, Streak and Rank; on iPhone on the lock screen too.\nA new name: CaliDay is now TreniDay.\nYour progress moves with a file: to a new phone, or from the web version to the app."
 }

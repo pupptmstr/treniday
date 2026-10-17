@@ -2489,6 +2489,136 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsAbout => 'Über die App';
 
   @override
+  String get settingsSectionData => 'DEINE DATEN';
+
+  @override
+  String get settingsExportTitle => 'Fortschritt in eine Datei speichern';
+
+  @override
+  String get settingsExportSubtitle =>
+      'Für ein neues Handy oder um von der Web-Version in die App zu wechseln';
+
+  @override
+  String get settingsImportTitle => 'Fortschritt aus einer Datei hinzufügen';
+
+  @override
+  String get settingsImportSubtitle =>
+      'Er wird mit dem zusammengeführt, was schon hier ist – nichts geht verloren';
+
+  @override
+  String get progressExportSubject => 'TreniDay-Fortschritt';
+
+  @override
+  String get progressExportFailed =>
+      'Die Datei konnte nicht gespeichert werden. Versuch es noch einmal.';
+
+  @override
+  String get progressImportTitle => 'Diesen Fortschritt hinzufügen?';
+
+  @override
+  String get progressImportIntro =>
+      'Er wird mit dem zusammengeführt, was hier ist. Deine Einstellungen bleiben, wie sie sind.';
+
+  @override
+  String progressImportWorkouts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '+$count Trainings',
+      one: '+$count Training',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportSp(int sp) {
+    return '+$sp SP';
+  }
+
+  @override
+  String progressImportRank(String from, String to) {
+    return 'Rang: $from → $to';
+  }
+
+  @override
+  String progressImportStreak(int from, int to) {
+    String _temp0 = intl.Intl.pluralLogic(
+      to,
+      locale: localeName,
+      other: 'Serie: $from → $to Tage',
+      one: 'Serie: $from → $to Tag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportBestStreak(int from, int to) {
+    String _temp0 = intl.Intl.pluralLogic(
+      to,
+      locale: localeName,
+      other: 'Längste Serie: $from → $to Tage',
+      one: 'Längste Serie: $from → $to Tag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportAchievements(int count, String names) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count neue Erfolge: $names',
+      one: '$count neuer Erfolg: $names',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportStage(String branch, int stage) {
+    return '$branch: Stufe $stage';
+  }
+
+  @override
+  String progressImportMovedOn(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count weitere Zweige sind vorangekommen',
+      one: '$count weiterer Zweig ist vorangekommen',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressImportOwn(int count) {
+    return 'Eigene Routinen, Zweige und Kurse: +$count';
+  }
+
+  @override
+  String get progressImportAdd => 'Hinzufügen';
+
+  @override
+  String get progressImportNothing => 'Alles aus dieser Datei ist schon hier.';
+
+  @override
+  String get progressImportDone => 'Fortschritt hinzugefügt';
+
+  @override
+  String get progressImportNotOurs =>
+      'Das ist keine TreniDay-Fortschrittsdatei, oder sie ist beschädigt.';
+
+  @override
+  String get progressImportNewer =>
+      'Diese Datei stammt aus einer neueren Version von TreniDay. Aktualisiere die App und füge die Datei noch einmal hinzu.';
+
+  @override
+  String get progressImportFailed =>
+      'Der Fortschritt konnte nicht hinzugefügt werden. Es hat sich nichts geändert.';
+
+  @override
+  String get commonOk => 'OK';
+
+  @override
   String get settingsSectionHealth => 'GESUNDHEIT';
 
   @override
@@ -3523,6 +3653,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Freunde gibt es nicht mehr: Ohne Server konnten sie nur einmal einen QR-Code tauschen, mehr nicht. Die App braucht keine Kamera und kein Bluetooth mehr.\nDein Name: Dein Host begrüßt dich damit auf dem Startbildschirm, Profil und Trainingsabschluss zeigen ihn. Ändern unter Einstellungen → Profil.\nVier neue Zweige außerhalb der Kurse: Starker Rücken, Gesäß, Arme & Schultern und Cardio — 22 Übungen, jede mit Goros Animation. Nimm sie in deinen eigenen Kurs auf: Kurse → + → Eigenen Kurs erstellen.';
 
   @override
+  String get releaseNotes0911 =>
+      'Nimm deinen Fortschritt mit: Einstellungen → Deine Daten → „Fortschritt in eine Datei speichern“, dann auf dem anderen Gerät „Fortschritt aus einer Datei hinzufügen“. Er wird mit dem zusammengeführt, was dort schon ist: Trainings, SP, Serie, Stufen und Erfolge von beiden, nichts geht verloren. Von der Web-Version in die App oder auf ein neues Handy.\nGab es an einem Tag auf beiden Geräten ein Training, bleibt das mit mehr SP das erste des Tages, das andere zählt als Bonustraining.';
+
+  @override
   String get releaseNotes0910 =>
       'Du willst TreniDay als Android-App? In der Web-Version auf einem Android-Handy lädt dich „Über die App“ ein, Tester zu werden: Google Play lässt eine neue App zu, wenn 12 Leute sie zwei Wochen lang getestet haben.\nDie Anfragen für Apple Health sind in deiner Sprache.\nAuf Android öffnet der Link zur Datenschutzerklärung in Health Connect die Erklärung.';
 
@@ -3580,5 +3714,5 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get releaseHistory09 =>
-      'Neue Kurse: „Morgenroutine“ mit Lerche Aurora und „Yoga“ mit Kater Miso.\nDie Hosts überreichen die Erfolge ihres Kurses; kürzere Übungen pro Seite.\nJede Übung hat eine Animation.\nEigene Kurse: aus fertigen Zweigen und eigenen, gebaut aus Übungen in deiner Reihenfolge.\nFreunde entfernt; dein Host begrüßt dich mit deinem Namen.\nVier Zweige außerhalb der Kurse: Rücken, Gesäß, Arme und Schultern, Cardio.\nEin eigener Ton für jeden Moment des Trainings, über deiner Musik.\nWidgets mit Goro: Heute, Goro, Serie und Rang; auf dem iPhone auch auf dem Sperrbildschirm.\nEin neuer Name: CaliDay heißt jetzt TreniDay.';
+      'Neue Kurse: „Morgenroutine“ mit Lerche Aurora und „Yoga“ mit Kater Miso.\nDie Hosts überreichen die Erfolge ihres Kurses; kürzere Übungen pro Seite.\nJede Übung hat eine Animation.\nEigene Kurse: aus fertigen Zweigen und eigenen, gebaut aus Übungen in deiner Reihenfolge.\nFreunde entfernt; dein Host begrüßt dich mit deinem Namen.\nVier Zweige außerhalb der Kurse: Rücken, Gesäß, Arme und Schultern, Cardio.\nEin eigener Ton für jeden Moment des Trainings, über deiner Musik.\nWidgets mit Goro: Heute, Goro, Serie und Rang; auf dem iPhone auch auf dem Sperrbildschirm.\nEin neuer Name: CaliDay heißt jetzt TreniDay.\nDein Fortschritt zieht mit einer Datei um: auf ein neues Handy oder von der Web-Version in die App.';
 }

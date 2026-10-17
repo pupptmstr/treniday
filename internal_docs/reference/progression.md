@@ -41,6 +41,16 @@ The stored value is unchanged: `UserProfile.preferredWorkoutMinutes` (HiveField 
 **Progression is per branch and per day, not per workout** (owner's rule, 2026-10-07): a branch moves on at most once per calendar day, on the first *successful* set of its current stage that day, in any workout — primary or bonus, a daily plan or a custom routine (`ProgressionService.applyDailyResult`, the day in `SkillProgress.lastProgressedOn`, HiveField 6). So a morning course and an afternoon course both progress, and a branch they share (Flex) moves once. A failed set does not use the day up; an exercise of another stage than the branch's current one never counts (a custom routine may hold one — before 0.8.19 such an exercise moved the current stage by the other exercise's targets). The Challenge is unchanged: passing it always advances the stage.
 Determined in `_finishWorkout`: `isPrimary = !workoutRepo.hasPrimaryWorkoutToday()`. The first workout of the day is always primary — regardless of whether it is a daily plan or a custom routine. Custom-only users can build a streak this way. `courseIdIndex` is still `null` for custom routines (not tied to any course).
 
+## Progress merge (0.9.11)
+`ProgressMerge.merge(local, imported, now:)` joins a progress file into this device's (Settings → Your data, [platform.md § Progress file](platform.md#progress-file-0911)). Pure and idempotent: a file added twice, or the merged device's own file, changes nothing; A into B and then B's file into A leave both the same.
+- **Workouts:** the union; a workout is known by `ProgressMerge.logKey` — the local time it ended to the millisecond, its course and its length.
+- **One first workout a day (owner, 2026-10-17):** on a day the file adds a first workout to, the first workout with the most SP keeps them; any other becomes a repeat (bonus) workout with `ProgressMerge.bonusSpOf` — counted again from its exercises as `_finishWorkout` counts a repeat one (no ×1.5, then ×0.5) when they still give exactly its SP, else a third of it. A tie keeps this device's.
+- **SP:** this device's plus what the merge changes in the log; the rank from SP.
+- **Streak:** if the file adds workouts, the merged days replayed through `StreakService` (a day counts when its earliest first workout did real work: SP, or a set of an exercise of a stage), the logs' freeze marks set to match; never below a device whose profile knows a later last day, or a longer streak on the same one. `longestStreak` the largest of all. Without new workouts the streak stays.
+- **Skill progress:** per branch the one further along (`compareProgress`: stage, then challenge open, less rest, more sets, more reps — the order `ProgressionService` takes the steps); `lastProgressedOn` the later.
+- **Achievements:** the union with the earliest date, then `AchievementService.checkAfterMerge` (the merged workout count, the longest streak, the rank, every course branch done) earns what only the combined totals reach, dated `now`.
+- **Own routines, branches, courses:** the union by id, this device's copy on the same id (`lastRunAt` the later). **Profile:** this device's settings; the name from the file only when there is none here; the active built-in courses the union (a profile without a list counts as Calisthenics); `lastSeenReleaseVersion` the newer.
+
 ## Services (domain layer)
 
 ### SPService
@@ -53,6 +63,7 @@ Determined in `_finishWorkout`: `isPrimary = !workoutRepo.hasPrimaryWorkoutToday
 - `tryAwardFreeze(profile)` → bool — +1 freeze every 7 days (max 3)
 - `isStreakAtRisk(profile)` — true if no workout today
 - `daysSinceLastWorkout(profile, {now})` — counter (-1 if never); `now` injectable for tests
+- `displayStreakOf(profile, now)` — what `displayStreakProvider` shows (below), pure; the merge's summary uses it too
 - `streakLostDate(profile)` — the calendar day on which the streak is actually gone if the user does not train: last workout + 2 days, + 3 with a freeze (mirrors `applyWorkout` / `displayStreak`); drives the streak-lost notification
 - All day counting goes through `core/utils/calendar_days.dart`. **Never** use `DateTime.difference(...).inDays` or `subtract/add(Duration(days: n))` on local dates: a local day is 23 / 25 h on a DST change, so `inDays` truncates 14 days to 13 and `subtract` lands on 23:00 / 01:00 of the neighbouring day (a 5-day streak reset after training on the DST Sunday and the Monday; the heatmap lost every cell before the change).
 
@@ -100,6 +111,7 @@ otherwise                          → 0
 ### AchievementService
 - `checkAfterWorkout({profile, totalWorkouts, alreadyEarned})` → `List<String>` newly earned ids (volume, streak, rank)
 - `checkAfterStageAdvance({branch, newStage, allProgress, alreadyEarned})` → `List<String>` newly earned ids (`first_challenge`, per-branch milestones, `<branch>_complete`, secret `all_complete`)
+- `checkAfterMerge({profile, totalWorkouts, allProgress, alreadyEarned})` → what a merged progress file earns by the combined totals: volume, streak (by `longestStreak`), rank, `all_complete`
 - Pure: `alreadyEarned` is updated in place, persistence is the caller's job. Every id it can return must exist in `AchievementCatalog` (the achievements screen looks them up); a test enforces that in both directions.
 
 ### Mutation Pattern
