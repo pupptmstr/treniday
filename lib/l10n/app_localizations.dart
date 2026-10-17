@@ -4386,6 +4386,54 @@ abstract class AppLocalizations {
   /// **'Couldn\'t add the progress. Nothing has changed.'**
   String get progressImportFailed;
 
+  /// No description provided for @progressHealthTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to {store}?'**
+  String progressHealthTitle(String store);
+
+  /// No description provided for @progressHealthBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} workout from the file can go to {store} too.} other{{count} workouts from the file can go to {store} too.}} Those at a time when {store} already has a workout are skipped, so none is counted twice.'**
+  String progressHealthBody(int count, String store);
+
+  /// No description provided for @progressHealthNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get progressHealthNotNow;
+
+  /// No description provided for @progressHealthWorking.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding to {store}…'**
+  String progressHealthWorking(String store);
+
+  /// No description provided for @progressHealthDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{Added to {store}: {count} workout} other{Added to {store}: {count} workouts}}'**
+  String progressHealthDone(int count, String store);
+
+  /// No description provided for @progressHealthAllThere.
+  ///
+  /// In en, this message translates to:
+  /// **'Every workout from the file is already in {store}.'**
+  String progressHealthAllThere(String store);
+
+  /// No description provided for @progressHealthTooOld.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} older workout was left out: {store} does not let the app check that far back.} other{{count} older workouts were left out: {store} does not let the app check that far back.}}'**
+  String progressHealthTooOld(int count, String store);
+
+  /// No description provided for @progressHealthFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach {store}, nothing was added there.'**
+  String progressHealthFailed(String store);
+
   /// No description provided for @commonOk.
   ///
   /// In en, this message translates to:
@@ -5972,7 +6020,7 @@ abstract class AppLocalizations {
   /// No description provided for @releaseNotes0911.
   ///
   /// In en, this message translates to:
-  /// **'Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.'**
+  /// **'Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.\nAfter adding a progress file, its workouts can go to Apple Health or Health Connect as well: those at a time when a workout is already there are skipped.\nOn Android, workouts now really reach Health Connect: until now they did not get there.'**
   String get releaseNotes0911;
 
   /// No description provided for @releaseNotes0910.

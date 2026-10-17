@@ -2627,6 +2627,64 @@ class AppLocalizationsEn extends AppLocalizations {
       'Couldn\'t add the progress. Nothing has changed.';
 
   @override
+  String progressHealthTitle(String store) {
+    return 'Add to $store?';
+  }
+
+  @override
+  String progressHealthBody(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count workouts from the file can go to $store too.',
+      one: '$count workout from the file can go to $store too.',
+    );
+    return '$_temp0 Those at a time when $store already has a workout are skipped, so none is counted twice.';
+  }
+
+  @override
+  String get progressHealthNotNow => 'Not now';
+
+  @override
+  String progressHealthWorking(String store) {
+    return 'Adding to $store…';
+  }
+
+  @override
+  String progressHealthDone(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Added to $store: $count workouts',
+      one: 'Added to $store: $count workout',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthAllThere(String store) {
+    return 'Every workout from the file is already in $store.';
+  }
+
+  @override
+  String progressHealthTooOld(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count older workouts were left out: $store does not let the app check that far back.',
+      one:
+          '$count older workout was left out: $store does not let the app check that far back.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthFailed(String store) {
+    return 'Couldn\'t reach $store, nothing was added there.';
+  }
+
+  @override
   String get commonOk => 'OK';
 
   @override
@@ -3662,7 +3720,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get releaseNotes0911 =>
-      'Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.';
+      'Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.\nAfter adding a progress file, its workouts can go to Apple Health or Health Connect as well: those at a time when a workout is already there are skipped.\nOn Android, workouts now really reach Health Connect: until now they did not get there.';
 
   @override
   String get releaseNotes0910 =>

@@ -1,22 +1,29 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/extensions/achievement_l10n.dart';
 import '../../core/extensions/build_context_l10n.dart';
+import '../../core/services/health_service.dart';
 import '../../core/services/notification_service.dart';
+import '../../core/utils/calendar_days.dart';
 import '../../core/services/progress_file_service.dart';
 import '../../data/models/custom_branch.dart';
 import '../../data/models/enums.dart';
+import '../../data/models/workout_log.dart';
 import '../../data/progress_file.dart';
 import '../../data/repositories/custom_course_repository.dart';
 import '../../data/repositories/custom_routine_repository.dart';
 import '../../data/repositories/progress_store.dart';
 import '../../data/static/release_notes_catalog.dart';
 import '../../domain/models/progress_snapshot.dart';
+import '../../domain/services/health_import.dart';
+import '../../domain/services/health_workout.dart';
 import '../../domain/services/progress_merge.dart';
 import '../../domain/services/streak_service.dart';
+import '../../domain/services/workout_energy.dart';
 import '../../l10n/app_localizations.dart';
 import '../home/providers/home_provider.dart';
 import '../home/providers/home_widget_sync.dart';
@@ -138,7 +145,133 @@ Future<void> importProgress(BuildContext context, WidgetRef ref) async {
   }
   _refreshAfterImport(ref, result);
   messenger.showSnackBar(SnackBar(content: Text(l10n.progressImportDone)));
+  if (context.mounted) await _offerHealth(context, ref, result.addedLogs);
 }
+
+/// After an import, when this device saves workouts to Apple Health / Health
+/// Connect: offers to add the file's workouts there too, leaving out every
+/// one at a time when the store already has a workout (owner, 2026-10-17).
+Future<void> _offerHealth(
+    BuildContext context, WidgetRef ref, List<WorkoutLog> added) async {
+  final settings = ref.read(settingsProvider);
+  if (kIsWeb || !settings.healthWorkoutsEnabled) return;
+  final range = HealthImport.rangeOf(added);
+  if (range == null) return;
+  final l10n = context.l10n;
+  final messenger = ScaffoldMessenger.of(context);
+  final store = defaultTargetPlatform == TargetPlatform.iOS
+      ? 'Apple Health'
+      : 'Health Connect';
+  final count = added.where((l) => HealthImport.spanOf(l) != null).length;
+
+  final ok = await showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.progressHealthTitle(store)),
+      content: Text(l10n.progressHealthBody(count, store)),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(ctx).pop(false),
+          child: Text(l10n.progressHealthNotNow),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.of(ctx).pop(true),
+          child: Text(l10n.progressImportAdd),
+        ),
+      ],
+    ),
+  );
+  if (ok != true || !context.mounted) return;
+
+  final navigator = Navigator.of(context, rootNavigator: true);
+  unawaited(showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => PopScope(
+      canPop: false,
+      child: AlertDialog(
+        content: Row(
+          children: [
+            const SizedBox.square(
+                dimension: 24, child: CircularProgressIndicator()),
+            const SizedBox(width: 16),
+            Expanded(child: Text(l10n.progressHealthWorking(store))),
+          ],
+        ),
+      ),
+    ),
+  ));
+  final lines = await _addToHealth(added, range,
+      readWeight: settings.healthWeightEnabled,
+      l10n: l10n,
+      store: store);
+  navigator.pop();
+  messenger.showSnackBar(SnackBar(content: Text(lines.join('\n'))));
+}
+
+/// Reads the workouts Health holds in [range], then writes the [added] ones
+/// that overlap none of them; returns what to tell the user.
+Future<List<String>> _addToHealth(
+  List<WorkoutLog> added,
+  TimeSpan range, {
+  required bool readWeight,
+  required AppLocalizations l10n,
+  required String store,
+}) async {
+  final health = HealthService.instance;
+  await health.requestWorkoutRead();
+  var from = range.start;
+  var inHealth = await health.workoutSpans(from, range.end);
+  if (inHealth == null && defaultTargetPlatform == TargetPlatform.android) {
+    // Health Connect on Android 13 and lower reads no further back than 30
+    // days, and fails the whole read when asked for more.
+    final limit = addCalendarDays(DateTime.now(), -30);
+    if (limit.isAfter(from)) {
+      from = limit;
+      inHealth = await health.workoutSpans(from, range.end);
+    }
+  }
+  if (inHealth == null) return [l10n.progressHealthFailed(store)];
+
+  final plan = HealthImport.plan(added, inHealth, checkedFrom: from);
+  final weightKg = WorkoutEnergy.resolveWeightKg(
+      readWeight ? await health.readBodyWeight() : null);
+  var written = 0;
+  for (final log in plan.toWrite) {
+    final span = HealthImport.spanOf(log)!;
+    final course = log.courseIdIndex == null
+        ? null
+        : CourseId.values[log.courseIdIndex!];
+    final kind = HealthWorkoutKind.of(course);
+    final ok = await health.writeWorkout(
+      start: span.start,
+      end: span.end,
+      calories: WorkoutEnergy.kcal(
+          durationSec: log.durationSec, weightKg: weightKg, met: kind.met),
+      kind: kind,
+      title: healthWorkoutTitle(course, l10n),
+    );
+    if (ok) written++;
+  }
+  return healthResultLines(plan, written, l10n: l10n, store: store);
+}
+
+/// What adding the file's workouts to Health came to, in the user's words.
+List<String> healthResultLines(
+  HealthImportPlan plan,
+  int written, {
+  required AppLocalizations l10n,
+  required String store,
+}) =>
+    [
+      if (plan.toWrite.isNotEmpty && written == 0)
+        l10n.progressHealthFailed(store)
+      else if (written > 0)
+        l10n.progressHealthDone(written, store)
+      else if (plan.unchecked == 0)
+        l10n.progressHealthAllThere(store),
+      if (plan.unchecked > 0) l10n.progressHealthTooOld(plan.unchecked, store),
+    ];
 
 /// The lines of the confirmation: what the merge adds, in the user's words.
 List<String> importSummaryLines(

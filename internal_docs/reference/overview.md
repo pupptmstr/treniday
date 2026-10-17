@@ -106,6 +106,8 @@ lib/
 │       ├── workout_progression.dart   ← WorkoutProgression: what a finished workout does to the branches, and its `growth` (pure)
 │       ├── home_digest.dart           ← HomeDigest: the middle of Home — the nearest achievement, the next rank, the growth of a day, the host's line of the day (pure)
 │       ├── workout_generator_service.dart
+│       ├── health_workout.dart        ← HealthWorkoutKind: a course's kind of workout in Health (strength / flexibility / yoga) and its MET; healthWorkoutTitle
+│       ├── health_import.dart         ← HealthImport: which of a file's workouts go to Health (none overlapping one already there; pure)
 │       ├── progress_merge.dart        ← ProgressMerge: a progress file joined into this device's (pure, idempotent) + the summary for the confirmation
 │       └── achievement_service.dart
 └── features/

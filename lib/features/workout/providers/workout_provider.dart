@@ -15,6 +15,7 @@ import '../../../domain/models/branch.dart';
 import '../../../domain/models/course.dart';
 import '../../../domain/models/workout_plan.dart';
 import '../../../domain/services/achievement_service.dart';
+import '../../../domain/services/health_workout.dart';
 import '../../../domain/services/progression_service.dart';
 import '../../../domain/services/rank_decay_service.dart';
 import '../../../domain/services/sp_service.dart';
@@ -23,6 +24,7 @@ import '../../../domain/services/workout_energy.dart';
 import '../../../domain/services/workout_generator_service.dart';
 import '../../../domain/services/workout_pace.dart';
 import '../../../domain/services/workout_progression.dart';
+import '../../../core/l10n/app_languages.dart' show l10nFor;
 import '../../../core/services/health_service.dart';
 import '../../../core/services/notification_service.dart';
 import '../../home/providers/home_widget_sync.dart';
@@ -635,6 +637,12 @@ class WorkoutNotifier extends Notifier<WorkoutState> {
     // Fire-and-forget: Hive write is async but nearly instantaneous locally.
     // Custom routines and own courses use courseIdIndex = null (not a
     // built-in course).
+    final builtInCourse = isCustomWorkout
+        ? null
+        : switch (course) {
+            BuiltInCourse(:final id) => id,
+            OwnCourse() => null,
+          };
     unawaited(workoutRepo.addLog(WorkoutLog(
       date: now,
       setType: state.plan.setType,
@@ -642,12 +650,7 @@ class WorkoutNotifier extends Notifier<WorkoutState> {
       spEarned: spEarned,
       durationSec: durationSec,
       isPrimary: isPrimary,
-      courseIdIndex: isCustomWorkout
-          ? null
-          : switch (course) {
-              BuiltInCourse(:final id) => id.index,
-              OwnCourse() => null,
-            },
+      courseIdIndex: builtInCourse?.index,
       freezeUsed: freezeUsed,
       freezeEarned: freezeEarned,
       // The raw estimate, so the pace can be learned from how long it took.
@@ -666,14 +669,19 @@ class WorkoutNotifier extends Notifier<WorkoutState> {
             ? await HealthService.instance.readBodyWeight()
             : null,
       );
+      // The kind follows the course: yoga, flexibility or strength.
+      final kind = HealthWorkoutKind.of(builtInCourse);
       final calories = WorkoutEnergy.kcal(
         durationSec: durationSec,
         weightKg: weightKg,
+        met: kind.met,
       );
       healthSaved = await HealthService.instance.writeWorkout(
         start: workoutStart,
         end: workoutEnd,
         calories: calories,
+        kind: kind,
+        title: healthWorkoutTitle(builtInCourse, l10nFor(settings.locale)),
       );
     }
 

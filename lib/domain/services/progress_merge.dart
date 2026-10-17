@@ -72,10 +72,15 @@ class ProgressMergeResult {
     required this.merged,
     required this.summary,
     required this.changesAnything,
+    required this.addedLogs,
   });
 
   final ProgressSnapshot merged;
   final ProgressMergeSummary summary;
+
+  /// The workouts the file brought: what may go to Apple Health / Health
+  /// Connect after the merge (`HealthImport`).
+  final List<WorkoutLog> addedLogs;
 
   /// False when everything in the file is already here: nothing to write.
   final bool changesAnything;
@@ -240,6 +245,7 @@ abstract final class ProgressMerge {
     );
     return ProgressMergeResult(
       merged: merged,
+      addedLogs: added,
       changesAnything: _text(merged) != _text(local),
       summary: ProgressMergeSummary(
         addedWorkouts: added.length,

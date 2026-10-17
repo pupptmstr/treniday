@@ -72,6 +72,9 @@ android {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    // MainActivity reads Health Connect's exercise sessions itself; the same
+    // version as the health plugin's.
+    implementation("androidx.health.connect:connect-client:1.2.0-alpha02")
 }
 
 flutter {

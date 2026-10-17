@@ -1,12 +1,12 @@
 # Progress export and import, merged — idea (owner, 2026-10-13)
 
-> Part of the project notes — the index is [internal_docs/README.md](../README.md).
+> Part of the project notes — the index is [internal_docs/README.md](../../README.md).
 
 **The wish:** the progress is saved to a file that the user can export from the app and open in the app on another device — when moving to a new phone, or from the web version to the mobile app. **Importing merges** the file into what the device already has (owner: "exactly a merge"), never replaces it: someone who trained on the web and on the phone ends up with both.
 
-**State:** built in **0.9.11** (branch `session/2026-10-17-progress-export`) — everything below but the Health offer, which waits for the owner (§ Health). How it works now: [platform.md § Progress file](../reference/platform.md#progress-file-0911).
+**State:** done in **0.9.11** (branch `session/2026-10-17-progress-export`), the Health offer included (owner, 2026-10-17). How it works now: [platform.md § Progress file](../../reference/platform.md#progress-file-0911).
 
-**Before it:** everything lived in seven Hive boxes on the device ([data-hive.md § Hive boxes](../reference/data-hive.md)): the profile, skill progress, the workout log, achievements, own routines, branches and courses. Nothing leaves the device; the web version keeps its data in the browser (IndexedDB of `pupptmstr.github.io`). An iPhone restored from a backup or Android's Auto Backup bring the files along, but neither covers web ↔ app, iOS ↔ Android or a phone set up as new.
+**Before it:** everything lived in seven Hive boxes on the device ([data-hive.md § Hive boxes](../../reference/data-hive.md)): the profile, skill progress, the workout log, achievements, own routines, branches and courses. Nothing leaves the device; the web version keeps its data in the browser (IndexedDB of `pupptmstr.github.io`). An iPhone restored from a backup or Android's Auto Backup bring the files along, but neither covers web ↔ app, iOS ↔ Android or a phone set up as new.
 
 ## Flow
 
@@ -27,7 +27,7 @@
 | **Achievements** | Union, the earliest date of each; then the achievement checks run on the merged state (combined totals can unlock new ones). |
 | **Own routines, branches, courses** | Union by id (ids are microsecond timestamps, unique across devices). The same id on both: this device's copy stays (`lastRunAt` = the later). Look-alike copies made separately on two devices stay as two; the user deletes one. |
 | **Settings and profile** | This device's settings stay (theme, language, reminders, sounds, haptics, Health, pull-up bar, goal, workout size). The name comes from the file only if this device has none. Active courses: the union, so a course trained on the other device shows up; the selected course stays. `lastSeenReleaseVersion`: the newer. |
-| **Health** | **Not built yet — the owner's call (2026-10-17).** Wanted (owner, 2026-10-13): after the merge, if this device writes workouts to Apple Health / Health Connect, the app offers to add the imported workouts there. It writes only those the health store does not already hold at that time (it reads the workouts of that range first), so a workout that reached Health from the other phone is not doubled. Reading workouts needs a new permission: `READ_EXERCISE` on Android (the Health Connect declaration in the Play Console and the store-listing answers change) and workouts in the iOS read set (`NSHealthShareUsageDescription` speaks of the weight only). Web → app, the main case, never reached Health, so without the read only a phone → phone move could double workouts. |
+| **Health** | **Built (owner, 2026-10-17: "but check that there are no such workouts at that time").** After the merge, if this device writes workouts to Apple Health / Health Connect, the app offers to add the imported workouts there. It writes only those the health store does not already hold at that time (it reads the workouts of that range first), so a workout that reached Health from the other phone is not doubled. As built: "already holds" = any workout of any app overlapping the file's workout in time (`HealthImport`); a failed read writes nothing. New permissions: `READ_EXERCISE` on Android (the Play declaration gets a fourth justification — [store-listing.md](../store-listing.md#health-apps-declaration-and-health-connect)), workouts in the iOS read set (`NSHealthShareUsageDescription` in five languages). The plugin's Android workout read also reads distance, energy and steps, so `MainActivity.kt` reads the sessions itself. Health Connect on Android ≤ 13 reads 30 days back at most: older workouts of the file are left out, and the user is told. Asked on the way (owner): the kind of workout follows the course (strength / flexibility / yoga, with their MET) — and Android had never received a workout, the type it was sent exists on iOS only. |
 
 ## Technical notes
 

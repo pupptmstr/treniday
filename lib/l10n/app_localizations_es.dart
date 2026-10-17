@@ -2627,6 +2627,64 @@ class AppLocalizationsEs extends AppLocalizations {
       'No se pudo añadir el progreso. No ha cambiado nada.';
 
   @override
+  String progressHealthTitle(String store) {
+    return '¿Añadir a $store?';
+  }
+
+  @override
+  String progressHealthBody(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entrenamientos del archivo también pueden ir a $store.',
+      one: '$count entrenamiento del archivo también puede ir a $store.',
+    );
+    return '$_temp0 Se omiten los que coinciden con un entrenamiento que $store ya tiene, para no contar nada dos veces.';
+  }
+
+  @override
+  String get progressHealthNotNow => 'Ahora no';
+
+  @override
+  String progressHealthWorking(String store) {
+    return 'Añadiendo a $store…';
+  }
+
+  @override
+  String progressHealthDone(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Añadidos a $store: $count entrenamientos',
+      one: 'Añadido a $store: $count entrenamiento',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthAllThere(String store) {
+    return 'Todos los entrenamientos del archivo ya están en $store.';
+  }
+
+  @override
+  String progressHealthTooOld(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Se omitieron $count entrenamientos antiguos: $store no deja que la app compruebe tan atrás.',
+      one:
+          'Se omitió $count entrenamiento antiguo: $store no deja que la app compruebe tan atrás.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthFailed(String store) {
+    return 'No se pudo conectar con $store, no se añadió nada.';
+  }
+
+  @override
   String get commonOk => 'Aceptar';
 
   @override
@@ -3665,7 +3723,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get releaseNotes0911 =>
-      'Llévate tu progreso: Ajustes → Tus datos → «Guardar el progreso en un archivo» y, en el otro dispositivo, «Añadir el progreso de un archivo». Se une a lo que ya hay: los entrenamientos, los SP, la racha, las etapas y los logros de ambos, sin perder nada. De la versión web a la app o a un teléfono nuevo.\nSi hubo un entrenamiento en los dos dispositivos el mismo día, el de más SP sigue siendo el primero del día y el otro cuenta como entrenamiento extra.';
+      'Llévate tu progreso: Ajustes → Tus datos → «Guardar el progreso en un archivo» y, en el otro dispositivo, «Añadir el progreso de un archivo». Se une a lo que ya hay: los entrenamientos, los SP, la racha, las etapas y los logros de ambos, sin perder nada. De la versión web a la app o a un teléfono nuevo.\nSi hubo un entrenamiento en los dos dispositivos el mismo día, el de más SP sigue siendo el primero del día y el otro cuenta como entrenamiento extra.\nTras añadir un archivo de progreso, sus entrenamientos también pueden ir a Apple Health o Health Connect: se omiten los que coinciden con uno que ya está allí.\nEn Android, los entrenamientos ahora sí llegan a Health Connect: hasta ahora no llegaban.';
 
   @override
   String get releaseNotes0910 =>

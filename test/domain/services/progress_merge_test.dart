@@ -134,6 +134,7 @@ void main() {
     expect(r.changesAnything, isTrue);
     expect(r.summary.addedWorkouts, 3);
     expect(r.summary.addedSp, 300);
+    expect(r.addedLogs.map((l) => l.date), [day(1), day(2), day(3)]);
   });
 
   test('a file added twice changes nothing the second time', () {

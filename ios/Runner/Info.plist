@@ -76,7 +76,7 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>TreniDay saves your workouts and the calories they burn to Apple Health.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>TreniDay reads your body weight from Apple Health to count the calories of a workout more precisely.</string>
+	<string>TreniDay reads your body weight from Apple Health to count the calories of a workout more precisely, and your workouts so that a workout added from a progress file is not saved twice.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -2616,6 +2616,64 @@ class AppLocalizationsDe extends AppLocalizations {
       'Der Fortschritt konnte nicht hinzugefügt werden. Es hat sich nichts geändert.';
 
   @override
+  String progressHealthTitle(String store) {
+    return 'Zu $store hinzufügen?';
+  }
+
+  @override
+  String progressHealthBody(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Trainings aus der Datei können auch zu $store.',
+      one: '$count Training aus der Datei kann auch zu $store.',
+    );
+    return '$_temp0 Trainings zu einer Zeit, für die $store schon ein Training hat, werden übersprungen, damit nichts doppelt zählt.';
+  }
+
+  @override
+  String get progressHealthNotNow => 'Nicht jetzt';
+
+  @override
+  String progressHealthWorking(String store) {
+    return 'Wird zu $store hinzugefügt …';
+  }
+
+  @override
+  String progressHealthDone(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Zu $store hinzugefügt: $count Trainings',
+      one: 'Zu $store hinzugefügt: $count Training',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthAllThere(String store) {
+    return 'Alle Trainings aus der Datei sind schon in $store.';
+  }
+
+  @override
+  String progressHealthTooOld(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count ältere Trainings wurden ausgelassen: $store lässt die App nicht so weit zurück prüfen.',
+      one:
+          '$count älteres Training wurde ausgelassen: $store lässt die App nicht so weit zurück prüfen.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthFailed(String store) {
+    return '$store war nicht erreichbar, dort wurde nichts hinzugefügt.';
+  }
+
+  @override
   String get commonOk => 'OK';
 
   @override
@@ -3654,7 +3712,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get releaseNotes0911 =>
-      'Nimm deinen Fortschritt mit: Einstellungen → Deine Daten → „Fortschritt in eine Datei speichern“, dann auf dem anderen Gerät „Fortschritt aus einer Datei hinzufügen“. Er wird mit dem zusammengeführt, was dort schon ist: Trainings, SP, Serie, Stufen und Erfolge von beiden, nichts geht verloren. Von der Web-Version in die App oder auf ein neues Handy.\nGab es an einem Tag auf beiden Geräten ein Training, bleibt das mit mehr SP das erste des Tages, das andere zählt als Bonustraining.';
+      'Nimm deinen Fortschritt mit: Einstellungen → Deine Daten → „Fortschritt in eine Datei speichern“, dann auf dem anderen Gerät „Fortschritt aus einer Datei hinzufügen“. Er wird mit dem zusammengeführt, was dort schon ist: Trainings, SP, Serie, Stufen und Erfolge von beiden, nichts geht verloren. Von der Web-Version in die App oder auf ein neues Handy.\nGab es an einem Tag auf beiden Geräten ein Training, bleibt das mit mehr SP das erste des Tages, das andere zählt als Bonustraining.\nNach dem Hinzufügen einer Fortschrittsdatei können ihre Trainings auch zu Apple Health oder Health Connect: Trainings zu einer Zeit, zu der dort schon eines ist, werden übersprungen.\nAuf Android kommen Trainings jetzt wirklich in Health Connect an: bisher kamen sie dort nicht an.';
 
   @override
   String get releaseNotes0910 =>

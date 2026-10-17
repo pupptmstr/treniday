@@ -2609,6 +2609,72 @@ class AppLocalizationsRu extends AppLocalizations {
       'Не получилось добавить прогресс. Ничего не изменилось.';
 
   @override
+  String progressHealthTitle(String store) {
+    return 'Добавить в $store?';
+  }
+
+  @override
+  String progressHealthBody(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count тренировки из файла можно добавить и в $store.',
+      many: '$count тренировок из файла можно добавить и в $store.',
+      few: '$count тренировки из файла можно добавить и в $store.',
+      one: '$count тренировку из файла можно добавить и в $store.',
+    );
+    return '$_temp0 Те, на время которых в $store уже есть тренировка, пропустятся, чтобы ничего не посчиталось дважды.';
+  }
+
+  @override
+  String get progressHealthNotNow => 'Не сейчас';
+
+  @override
+  String progressHealthWorking(String store) {
+    return 'Добавляем в $store…';
+  }
+
+  @override
+  String progressHealthDone(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Добавлено в $store: $count тренировки',
+      many: 'Добавлено в $store: $count тренировок',
+      few: 'Добавлено в $store: $count тренировки',
+      one: 'Добавлено в $store: $count тренировка',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthAllThere(String store) {
+    return 'Все тренировки из файла уже есть в $store.';
+  }
+
+  @override
+  String progressHealthTooOld(int count, String store) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          '$count старые тренировки не добавлены: $store не даёт приложению проверить так далеко назад.',
+      many:
+          '$count старых тренировок не добавлено: $store не даёт приложению проверить так далеко назад.',
+      few:
+          '$count старые тренировки не добавлены: $store не даёт приложению проверить так далеко назад.',
+      one:
+          '$count старая тренировка не добавлена: $store не даёт приложению проверить так далеко назад.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String progressHealthFailed(String store) {
+    return 'Не получилось связаться с $store, туда ничего не добавлено.';
+  }
+
+  @override
   String get commonOk => 'ОК';
 
   @override
@@ -3646,7 +3712,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get releaseNotes0911 =>
-      'Прогресс можно перенести: «Настройки» → «Твои данные» → «Сохранить прогресс в файл», а на другом устройстве — «Добавить прогресс из файла». Он объединится с тем, что там уже есть: тренировки, SP, серия, этапы и достижения обоих, ничего не пропадёт. Из веб-версии в приложение или на новый телефон.\nЕсли в один день были тренировки на обоих устройствах, первой тренировкой дня остаётся та, где больше SP, а другая считается бонусной.';
+      'Прогресс можно перенести: «Настройки» → «Твои данные» → «Сохранить прогресс в файл», а на другом устройстве — «Добавить прогресс из файла». Он объединится с тем, что там уже есть: тренировки, SP, серия, этапы и достижения обоих, ничего не пропадёт. Из веб-версии в приложение или на новый телефон.\nЕсли в один день были тренировки на обоих устройствах, первой тренировкой дня остаётся та, где больше SP, а другая считается бонусной.\nПосле добавления файла прогресса его тренировки можно добавить и в Apple Health или Health Connect: те, на время которых там уже есть тренировка, пропускаются.\nНа Android тренировки теперь действительно попадают в Health Connect: до сих пор они туда не доходили.';
 
   @override
   String get releaseNotes0910 =>

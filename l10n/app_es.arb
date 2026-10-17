@@ -1032,6 +1032,72 @@
   "progressImportNotOurs": "No es un archivo de progreso de TreniDay o está dañado.",
   "progressImportNewer": "Este archivo es de una versión más nueva de TreniDay. Actualiza la app y vuelve a añadir el archivo.",
   "progressImportFailed": "No se pudo añadir el progreso. No ha cambiado nada.",
+  "progressHealthTitle": "¿Añadir a {store}?",
+  "@progressHealthTitle": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthBody": "{count, plural, one{{count} entrenamiento del archivo también puede ir a {store}.} other{{count} entrenamientos del archivo también pueden ir a {store}.}} Se omiten los que coinciden con un entrenamiento que {store} ya tiene, para no contar nada dos veces.",
+  "@progressHealthBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthNotNow": "Ahora no",
+  "progressHealthWorking": "Añadiendo a {store}…",
+  "@progressHealthWorking": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthDone": "{count, plural, one{Añadido a {store}: {count} entrenamiento} other{Añadidos a {store}: {count} entrenamientos}}",
+  "@progressHealthDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthAllThere": "Todos los entrenamientos del archivo ya están en {store}.",
+  "@progressHealthAllThere": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthTooOld": "{count, plural, one{Se omitió {count} entrenamiento antiguo: {store} no deja que la app compruebe tan atrás.} other{Se omitieron {count} entrenamientos antiguos: {store} no deja que la app compruebe tan atrás.}}",
+  "@progressHealthTooOld": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthFailed": "No se pudo conectar con {store}, no se añadió nada.",
+  "@progressHealthFailed": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
   "commonOk": "Aceptar",
   "settingsSectionHealth": "SALUD",
   "settingsHealthWorkoutsTitle": "Registrar entrenamientos",
@@ -1573,7 +1639,7 @@
   "whatsNewHistory": "Historial de versiones",
   "releaseNotes094": "Tus cursos ya están en la lista de cursos bajo +: desmarca uno para ocultarlo de la fila de arriba (se guarda), el lápiz lo abre para editarlo.\nUn curso propio lleva arriba una marca de herramientas en vez de la cara de su anfitrión.\nUn logro aún pendiente: su anfitrión ahora lo sostiene, una medalla gris con candado.\n«Acerca de»: toca a Goro, tiene algunas poses nuevas.\nPantalla principal: antes del primer entrenamiento del día tu anfitrión te dice unas palabras (cada uno las suyas, nuevas cada vez que abres la app o las tocas), y debajo están tus próximas metas (el siguiente rango, el logro más cercano, un reto abierto que puedes empezar ahí mismo) y las ramas del curso.\nDespués, la pantalla principal muestra tus últimos entrenamientos y lo que ha crecido hoy: más repeticiones, una serie, menos descanso, una etapa nueva.\nLa flecha del botón de entrenamiento despliega el plan del día, con Goro mostrando cada ejercicio.\nLas animaciones de Goro dondequiera que se nombra un ejercicio: el camino de una rama, la pestaña Cursos, los constructores, los entrenamientos guardados, el historial, el descanso antes del siguiente ejercicio.",
   "releaseNotes095": "Ya no hay amigos: sin servidor solo podían intercambiar un código QR una vez y nada más. La app ya no necesita la cámara ni el Bluetooth.\nTu nombre: tu anfitrión te saluda con él en la pantalla de inicio, y el perfil y el final del entrenamiento lo muestran. Cámbialo en Ajustes → Perfil.\nCuatro ramas nuevas fuera de los cursos: Espalda fuerte, Glúteos, Brazos y hombros y Cardio: 22 ejercicios, cada uno con la animación de Goro. Añádelas a tu propio curso: Cursos → + → Crear tu propio curso.",
-  "releaseNotes0911": "Llévate tu progreso: Ajustes → Tus datos → «Guardar el progreso en un archivo» y, en el otro dispositivo, «Añadir el progreso de un archivo». Se une a lo que ya hay: los entrenamientos, los SP, la racha, las etapas y los logros de ambos, sin perder nada. De la versión web a la app o a un teléfono nuevo.\nSi hubo un entrenamiento en los dos dispositivos el mismo día, el de más SP sigue siendo el primero del día y el otro cuenta como entrenamiento extra.",
+  "releaseNotes0911": "Llévate tu progreso: Ajustes → Tus datos → «Guardar el progreso en un archivo» y, en el otro dispositivo, «Añadir el progreso de un archivo». Se une a lo que ya hay: los entrenamientos, los SP, la racha, las etapas y los logros de ambos, sin perder nada. De la versión web a la app o a un teléfono nuevo.\nSi hubo un entrenamiento en los dos dispositivos el mismo día, el de más SP sigue siendo el primero del día y el otro cuenta como entrenamiento extra.\nTras añadir un archivo de progreso, sus entrenamientos también pueden ir a Apple Health o Health Connect: se omiten los que coinciden con uno que ya está allí.\nEn Android, los entrenamientos ahora sí llegan a Health Connect: hasta ahora no llegaban.",
   "releaseNotes0910": "¿Quieres TreniDay como app para Android? En la versión web en un móvil Android, «Acerca de» te invita a ser probador: Google Play admite una app nueva cuando 12 personas la han probado durante dos semanas.\nLas solicitudes de acceso a Apple Health están en tu idioma.\nEn Android, el enlace a la política de privacidad en Health Connect abre la política.",
   "releaseNotes099": "CaliDay ahora se llama TreniDay: un nombre nuevo, el mismo Goro y todo tu progreso.\nLa versión web se ha mudado a pupptmstr.github.io/treniday/app: ábrela en el mismo navegador y tu progreso seguirá ahí.",
   "releaseNotes098": "La versión web en el iPhone ya reproduce todos los sonidos del entrenamiento — los tics, el inicio de un aguante, el cambio de lado, el final del descanso —, no solo los que siguen a un toque.\nTreniDay tiene sitio web: pupptmstr.github.io/treniday — todo sobre la app en cuatro idiomas.",

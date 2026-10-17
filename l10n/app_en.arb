@@ -1032,6 +1032,72 @@
   "progressImportNotOurs": "This isn't a TreniDay progress file, or it is damaged.",
   "progressImportNewer": "This file is from a newer version of TreniDay. Update the app and add the file again.",
   "progressImportFailed": "Couldn't add the progress. Nothing has changed.",
+  "progressHealthTitle": "Add to {store}?",
+  "@progressHealthTitle": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthBody": "{count, plural, one{{count} workout from the file can go to {store} too.} other{{count} workouts from the file can go to {store} too.}} Those at a time when {store} already has a workout are skipped, so none is counted twice.",
+  "@progressHealthBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthNotNow": "Not now",
+  "progressHealthWorking": "Adding to {store}…",
+  "@progressHealthWorking": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthDone": "{count, plural, one{Added to {store}: {count} workout} other{Added to {store}: {count} workouts}}",
+  "@progressHealthDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthAllThere": "Every workout from the file is already in {store}.",
+  "@progressHealthAllThere": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthTooOld": "{count, plural, one{{count} older workout was left out: {store} does not let the app check that far back.} other{{count} older workouts were left out: {store} does not let the app check that far back.}}",
+  "@progressHealthTooOld": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "store": {
+        "type": "String"
+      }
+    }
+  },
+  "progressHealthFailed": "Couldn't reach {store}, nothing was added there.",
+  "@progressHealthFailed": {
+    "placeholders": {
+      "store": {
+        "type": "String"
+      }
+    }
+  },
   "commonOk": "OK",
   "settingsSectionHealth": "HEALTH",
   "settingsHealthWorkoutsTitle": "Record workouts",
@@ -1573,7 +1639,7 @@
   "whatsNewHistory": "Version history",
   "releaseNotes094": "Your own courses are in the course list under +: untick one to hide it from the row at the top (it is kept), the pencil opens it for editing.\nAn own course carries a hand-tool mark in the row at the top instead of its host's face.\nAn achievement still ahead: its host now holds it, a grey medal with a padlock.\nAbout: tap Goro, he has a few new poses.\nHome screen: before the first workout of the day your host has a word for you (each host its own, a new one every time you open the app or tap it), and below are your next goals (the next rank, the nearest achievement, an open challenge you can start right there) and the branches of the course.\nAfter it, the home screen shows your latest workouts and what grew today: more reps, a set, less rest, a new stage.\nThe arrow on the workout button unfolds today's plan, with Goro showing every exercise.\nGoro's animations wherever an exercise is named: the path of a branch, the Courses tab, the builders, saved workouts, the history, the rest before the next exercise.",
   "releaseNotes095": "Friends are gone: without a server they could only swap a QR code once, and that was it. The app no longer needs the camera or Bluetooth.\nYour name: your host greets you by it on the home screen, and the profile and the end of a workout show it. Change it in Settings → Profile.\nFour new branches outside the courses: Strong Back, Glutes, Arms & Shoulders and Cardio — 22 exercises, each with Goro’s animation. Add them to your own course: Courses → + → Create your own course.",
-  "releaseNotes0911": "Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.",
+  "releaseNotes0911": "Take your progress with you: Settings → Your data → “Save progress to a file”, then on the other device “Add progress from a file”. It joins what is there: the workouts, SP, streak, stages and achievements of both, nothing is lost. From the web version to the app, or to a new phone.\nIf both devices had a workout on the same day, the one with more SP stays the first of the day and the other counts as a bonus workout.\nAfter adding a progress file, its workouts can go to Apple Health or Health Connect as well: those at a time when a workout is already there are skipped.\nOn Android, workouts now really reach Health Connect: until now they did not get there.",
   "releaseNotes0910": "Want TreniDay as an Android app? In the web version on an Android phone, About invites you to become a tester: Google Play lets a new app in after 12 people have tested it for two weeks.\nThe Apple Health permission requests speak your language.\nOn Android, the privacy policy link in Health Connect opens the policy.",
   "releaseNotes099": "CaliDay is now TreniDay: a new name, the same Goro and all your progress.\nThe web version has moved to pupptmstr.github.io/treniday/app — open it in the same browser and your progress is there.",
   "releaseNotes098": "The web version on iPhone now plays every workout sound — the ticks, the start of a hold, switch sides, the end of a rest — not only the ones that follow a tap.\nTreniDay has a website: pupptmstr.github.io/treniday — what the app is about, in four languages.",

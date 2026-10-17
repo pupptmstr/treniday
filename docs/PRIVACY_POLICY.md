@@ -68,6 +68,8 @@ If you opt in during onboarding or in Settings, TreniDay can:
 
 - **Write** workout sessions (type, duration, estimated calories) to Apple Health or Google Health Connect
 - **Read** your body weight from Apple Health or Google Health Connect for more accurate calorie estimates
+- **Read** the times of the workouts already in Apple Health or Google Health Connect, only when you add a
+  progress file and choose to put its workouts there too, so that a workout already recorded is not added twice
 
 This integration is **entirely optional** and **off by default**. Health data is read and written
 directly on your device. It is never transmitted to TreniDay's developers or any third party.
